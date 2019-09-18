@@ -1,13 +1,10 @@
 package spring.project.autumn.service;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.http.HttpServletResponse;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.apache.commons.net.ftp.FTPClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
@@ -24,46 +21,66 @@ public class DataService {
 	DataMapper dm;
 	
 	public void setData() {
-		File[] list = getXml();
-		for (File temp : list) {
-			setXml(temp);
-		}
+//		File[] list = getXml();
+//		for (File temp : list) {
+//			setXml(temp);
+//		}
+		
+		getXml();
 	}
 	
 	// xml 다운로드하고 저장 된 위치 리턴
-	public File[] getXml() {
-		System.out.println("setXml()");
+//	public File[] getXml() {
+//		String path = "D:\\Data\\Ionosonde\\";
+//		File dir = new File(path);
+//		return dir.listFiles();
+//	}
+	
+	public void getXml() {
 		
-		String path = "D:\\Data\\Ionosonde\\";
-		File dir = new File(path);
 		
-		return dir.listFiles();
+		try {
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	// xml 파일 읽고 db에 데이터 저장
 	public void setXml(File file) {
-		System.out.println("setData()");
-		
 		try {
+			DataVO dvo = new DataVO();
+			String fileName = file.getName().toString();
+			dvo.setStation(fileName.substring(0, 5));
+			dvo.setYear(Integer.parseInt(fileName.substring(6, 10)));
+			dvo.setDoy(Integer.parseInt(fileName.substring(10, 13)));
+			dvo.setHh(Integer.parseInt(fileName.substring(13, 15)));
+			dvo.setMm(Integer.parseInt(fileName.substring(15, 17)));
+			
 			DocumentBuilderFactory dFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dFactory.newDocumentBuilder();
 			Document doc =  dBuilder.parse(file);
 			doc.getDocumentElement().normalize();
-			
-			Element root = doc.getDocumentElement();
-			System.out.println("root: " + root);
-			
 			NodeList nList = doc.getElementsByTagName("URSI");
-			System.out.println("listNum: " + nList.getLength());
-			
-			DataVO dvo = new DataVO();
+
 			for (int i = 0; i < nList.getLength(); i++) {
 				Element el = (Element) nList.item(i);
 				String name = el.getAttributes().getNamedItem("Name").getNodeValue().toString();
-				if ("foF2".equals(name)) {
+				
+				switch (name) {
+				case "foF2":
 					dvo.setFoF2(Float.parseFloat(el.getAttributes().getNamedItem("Val").getNodeValue().toString()));
-				} else if ("foEs".equals(name)) {
+					break;
+				case "foEs":
 					dvo.setFoEs(Float.parseFloat(el.getAttributes().getNamedItem("Val").getNodeValue().toString()));
+					break;
+				case "hmF2":
+					dvo.setHmF2(Float.parseFloat(el.getAttributes().getNamedItem("Val").getNodeValue().toString()));
+					break;
+				case "h`Es":
+					dvo.setHpEs(Float.parseFloat(el.getAttributes().getNamedItem("Val").getNodeValue().toString()));
+					break;
 				}
 			}
 			dm.setData(dvo);
