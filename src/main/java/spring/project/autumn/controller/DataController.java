@@ -18,7 +18,7 @@ public class DataController {
 	@PostMapping("/submit")
 	public void submit(HttpServletResponse res) {
 		System.out.println("submit()");
-		ds.readData(res);
+		ds.setData();
 	}
 	
 }

@@ -1,8 +1,8 @@
 package spring.project.autumn.service;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.parsers.DocumentBuilder;
@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import spring.project.autumn.mapper.DataMapper;
@@ -24,29 +23,31 @@ public class DataService {
 	@Autowired
 	DataMapper dm;
 	
-	public void readData(HttpServletResponse res) {
-		System.out.println("readData()");
+	public void setData() {
+		File[] list = getXml();
+		for (File temp : list) {
+			setXml(temp);
+		}
+	}
+	
+	// xml 다운로드하고 저장 된 위치 리턴
+	public File[] getXml() {
+		System.out.println("setXml()");
 		
 		String path = "D:\\Data\\Ionosonde\\";
-		String fileName = "IC437_2018060000000_SAO.XML";
+		File dir = new File(path);
 		
-//		try {
-//			File file = new File(path + fileName);
-//			FileReader fileReader = new FileReader(file);
-//			BufferedReader reader = new BufferedReader(fileReader);
-//			String line = "";
-//			while((line = reader.readLine()) != null) {
-//				System.out.println(line);
-//			}
-//			reader.close();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		return dir.listFiles();
+	}
+	
+	// xml 파일 읽고 db에 데이터 저장
+	public void setXml(File file) {
+		System.out.println("setData()");
 		
 		try {
 			DocumentBuilderFactory dFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dFactory.newDocumentBuilder();
-			Document doc =  dBuilder.parse(new File(path + fileName));
+			Document doc =  dBuilder.parse(file);
 			doc.getDocumentElement().normalize();
 			
 			Element root = doc.getDocumentElement();
@@ -65,24 +66,8 @@ public class DataService {
 					dvo.setFoEs(Float.parseFloat(el.getAttributes().getNamedItem("Val").getNodeValue().toString()));
 				}
 			}
-			
 			dm.setData(dvo);
 			
-//			NodeList childeren = root.getChildNodes();
-//			for (int i = 0; i < childeren.getLength(); i++) {
-//				Node node = childeren.item(i);
-//				System.out.println("i: " + node.toString());
-//				
-//				if (node.getNodeType() == Node.ELEMENT_NODE) {
-//					Element ele = (Element) node;
-//					String nodeName = ele.getNodeName();
-//					System.out.println("node name: " + nodeName);
-//					
-//					if (nodeName.equals("SAORecord")) {
-//						System.out.println("node attribute: " + ele.getAttribute("name"));
-//					}
-//				}
-//			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
