@@ -5,6 +5,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.ftp.FTPFile;
+import org.apache.commons.net.ftp.FTPReply;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
@@ -26,7 +28,7 @@ public class DataService {
 //			setXml(temp);
 //		}
 		
-		getXml();
+		getXml("IC437");
 	}
 	
 	// xml 다운로드하고 저장 된 위치 리턴
@@ -36,18 +38,40 @@ public class DataService {
 //		return dir.listFiles();
 //	}
 	
-	public void getXml() {
+	public void getXml(String station) {
+		String url = "ftp.ngdc.noaa.gov";
+		String id = "anonymous";
+		String pw = "";
+//		String ftpPath = "/ionosonde/data/" + station;
+		String ftpPath = "/ionosonde/mids10/IC437/individual/2018/060/scaled";
+		String localPath = "D:\\Data\\";
 		
+		FTPClient client = new FTPClient();
 		
 		try {
+			client.connect(url);
 			
+			if (!client.login("anonymous", "")) {
+				System.out.println("!login");
+			} else {
+				System.out.println("login");
+			}
 			
+			System.out.println("ss");
+			
+			FTPFile[] files = client.listFiles(ftpPath);
+			System.out.println(files.toString());
+//			for (int i = 0; i < files.length; i++) {
+//				System.out.println("file: " + files[i].toString());
+//			}
+			
+			System.out.println("dd");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	// xml 파일 읽고 db에 데이터 저장
+	// xml 파일 읽어서 db에 데이터 저장
 	public void setXml(File file) {
 		try {
 			DataVO dvo = new DataVO();
