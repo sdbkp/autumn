@@ -1,16 +1,16 @@
 package spring.project.autumn.vo;
 
-public class XmlVO {
+public class FileVO {
 	
 	String station;
 	String year;
 	String doy;
 	String fileName;
 	
-	public XmlVO() {	
+	public FileVO() {	
 	}
 	
-	public XmlVO(String station, String year, String doy, String fileName) {
+	public FileVO(String station, String year, String doy, String fileName) {
 		this.station = station;
 		this.year = year;
 		this.doy = doy;

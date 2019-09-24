@@ -4,8 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="spring.project.autumn.mapper.DataMapper">
 	<insert id="setIonoData">
-		insert into ${station} (`year`, `doy`, `hh`, `mm`, foF2, foEs, hmF2, hpEs) 
-		values (#{year}, #{doy}, #{hh}, #{mm}, #{foF2}, #{foEs}, #{hmF2}, #{hpEs})
+		insert into ${station} (`year`, `doy`, `month`, `day`, `hh`, `mm`, foF2, foEs, hmF2, hpEs) 
+		values (#{year}, #{doy}, #{month}, #{day}, #{hh}, #{mm}, #{foF2}, #{foEs}, #{hmF2}, #{hpEs})
 	</insert>
 	
 	<insert id="setXmlList">
@@ -13,7 +13,7 @@
 		values (#{station}, #{year}, #{doy}, #{fileName})
 	</insert>
 	
-	<select id="getXmlList" resultType="spring.project.autumn.vo.XmlVO">
+	<select id="getXmlList" resultType="spring.project.autumn.vo.FileVO">
 		select * from files where station = #{station} order by `no` desc limit 1
 	</select>
 </mapper>

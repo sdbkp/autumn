@@ -1,8 +1,15 @@
 package spring.project.autumn.service;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -17,7 +24,7 @@ import org.w3c.dom.NodeList;
 
 import spring.project.autumn.mapper.DataMapper;
 import spring.project.autumn.vo.DataVO;
-import spring.project.autumn.vo.XmlVO;
+import spring.project.autumn.vo.FileVO;
 
 @Service
 public class DataService {
@@ -30,14 +37,15 @@ public class DataService {
 			"IC437", "JJ433"	
 		};
 		
-		for (String station : stations) {		
-			getXml(station);
-		}
+//		for (String station : stations) {		
+//			getXml(station);
+//		}
 		
+		getSao("IC437");
 		System.out.println("End setData()");
 	}
 	
-	public void getXml(String station) {
+	public void getSao(String station) {
 		try {
 			String url = "ftp.ngdc.noaa.gov";
 			String ftpPath = "/ionosonde/data/" + station + "/individual";
@@ -84,15 +92,14 @@ public class DataService {
 											fileName = file.getName();
 											ext = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length());
 											if ("SAO".equals(ext)) {
-												File xmlFilePath = new File(localPath + fileName);
-												OutputStream os = new FileOutputStream(xmlFilePath);
-											    ftp.retrieveFile(fileName, os);
-											    
-											    if (setXml(xmlFilePath) == 1) {
-											    	XmlVO xml = new XmlVO(station, tempYear, tempDoy, fileName);
-											    	dm.setXmlList(xml);
-											    	System.out.println(xml.toString());
-											    }
+												
+												InputStream is = ftp.retrieveFileStream(fileName);
+												if (setSao(is) == 1) {
+													FileVO sao = new FileVO(station, tempYear, tempDoy, fileName);
+											    	dm.setXmlList(sao);
+											    	System.out.println(sao.toString());
+												}
+												
 											    
 											}
 											
@@ -129,13 +136,36 @@ public class DataService {
 		}
 	}
 	
-	public void setSao(File file) {
+	public int setSao(InputStream is) {
+		List<String> data = new ArrayList<String>();
+		int result = -1;
+		
 		try {
+//			BufferedReader br = new BufferedReader(new FileReader(file));
+			BufferedReader br = new BufferedReader(new InputStreamReader(is));
+			String line = null;
+			while ((line = br.readLine()) != null) {
+				data.add(line);
+			}
 			
+			String station = data.get(3).substring(11,16);
+			int year = Integer.parseInt(data.get(4).substring(2, 6));
+			int doy = Integer.parseInt(data.get(4).substring(6, 9));
+			int month = Integer.parseInt(data.get(4).substring(9, 11));
+			int day = Integer.parseInt(data.get(4).substring(11, 13));
+			int hh = Integer.parseInt(data.get(4).substring(13, 15));
+			int mm = Integer.parseInt(data.get(4).substring(15, 17));
+			float foF2 = Float.parseFloat(data.get(5).substring(0, 8));
+			float foEs = Float.parseFloat(data.get(5).substring(40, 48));
+			float hmF2 = Float.parseFloat(data.get(7).substring(8, 16));
+			float hpEs = Float.parseFloat(data.get(5).substring(104, 112));
+			result = dm.setIonoData(new DataVO(station, year, doy, month, day, hh, mm, foF2, foEs, hmF2, hpEs));
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		return result;
 	}
 	
 	// xml 파일 읽어서 db에 데이터 저장
