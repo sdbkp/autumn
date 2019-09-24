@@ -83,7 +83,7 @@ public class DataService {
 											
 											fileName = file.getName();
 											ext = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length());
-											if ("XML".equals(ext)) {
+											if ("SAO".equals(ext)) {
 												File xmlFilePath = new File(localPath + fileName);
 												OutputStream os = new FileOutputStream(xmlFilePath);
 											    ftp.retrieveFile(fileName, os);
@@ -126,6 +126,15 @@ public class DataService {
 			for (String reply : replies) {
 				System.out.println(reply);
 			}
+		}
+	}
+	
+	public void setSao(File file) {
+		try {
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
