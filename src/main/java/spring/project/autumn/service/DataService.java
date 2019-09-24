@@ -40,34 +40,51 @@ public class DataService {
 	
 	public void getXml(String station) {
 		String url = "ftp.ngdc.noaa.gov";
-		String id = "anonymous";
-		String pw = "";
 //		String ftpPath = "/ionosonde/data/" + station;
-		String ftpPath = "/ionosonde/mids10/IC437/individual/2018/060/scaled";
+		String ftpPath = "/ionosonde/data/IC437/individual/2018/060/scaled/";
 		String localPath = "D:\\Data\\";
 		
-		FTPClient client = new FTPClient();
+		FTPClient ftp = new FTPClient();
 		
 		try {
-			client.connect(url);
+			ftp.connect(url);
+//			ftpStatus(ftp);
 			
-			if (!client.login("anonymous", "")) {
-				System.out.println("!login");
-			} else {
-				System.out.println("login");
-			}
+			ftp.enterLocalPassiveMode();
+			ftp.login("anonymous", "");
+			ftpStatus(ftp);
 			
-			System.out.println("ss");
+			ftp.changeWorkingDirectory(ftpPath);
+//			ftpStatus(ftp);
 			
-			FTPFile[] files = client.listFiles(ftpPath);
-			System.out.println(files.toString());
+			System.out.print("listDirectories: ");
+			FTPFile[] files = ftp.listFiles();
+			System.out.println(files.length);
 //			for (int i = 0; i < files.length; i++) {
 //				System.out.println("file: " + files[i].toString());
 //			}
+			ftpStatus(ftp);
 			
-			System.out.println("dd");
+//			System.out.print("listNames: ");
+//			String[] names = client.listNames();
+//			System.out.println(names.length);
+			
+			ftp.logout();
+			System.out.println("logout");
+			ftp.disconnect();
+			System.out.println("disconnect");
+			
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public void ftpStatus(FTPClient ftp) {
+		String[] replies = ftp.getReplyStrings();
+		if (replies != null && replies.length > 0) {
+			for (String reply : replies) {
+				System.out.println(reply);
+			}
 		}
 	}
 	
