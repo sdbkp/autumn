@@ -3,8 +3,17 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="spring.project.autumn.mapper.DataMapper">
-	<insert id="setData">
+	<insert id="setIonoData">
 		insert into ${station} (`year`, `doy`, `hh`, `mm`, foF2, foEs, hmF2, hpEs) 
-		values (#{year}, #{doy}, #{hh}, #{mm}, #{foF2}, #{foEs}, #{hmF2}, #{hpEs});
+		values (#{year}, #{doy}, #{hh}, #{mm}, #{foF2}, #{foEs}, #{hmF2}, #{hpEs})
 	</insert>
+	
+	<insert id="setXmlList">
+		insert into files (station, `year`, `doy`, `fileName`) 
+		values (#{station}, #{year}, #{doy}, #{fileName})
+	</insert>
+	
+	<select id="getXmlList" resultType="spring.project.autumn.vo.XmlVO">
+		select * from files where station = #{station} order by `no` desc limit 1
+	</select>
 </mapper>

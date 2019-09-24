@@ -1,12 +1,14 @@
 package spring.project.autumn.service;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
-import org.apache.commons.net.ftp.FTPReply;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
@@ -15,6 +17,7 @@ import org.w3c.dom.NodeList;
 
 import spring.project.autumn.mapper.DataMapper;
 import spring.project.autumn.vo.DataVO;
+import spring.project.autumn.vo.XmlVO;
 
 @Service
 public class DataService {
@@ -23,56 +26,94 @@ public class DataService {
 	DataMapper dm;
 	
 	public void setData() {
-//		File[] list = getXml();
-//		for (File temp : list) {
-//			setXml(temp);
-//		}
+		String[] stations = {
+			"IC437", "JJ433"	
+		};
 		
-		getXml("IC437");
+		for (String station : stations) {		
+			getXml(station);
+		}
+		
+		System.out.println("End setData()");
 	}
 	
-	// xml 다운로드하고 저장 된 위치 리턴
-//	public File[] getXml() {
-//		String path = "D:\\Data\\Ionosonde\\";
-//		File dir = new File(path);
-//		return dir.listFiles();
-//	}
-	
 	public void getXml(String station) {
-		String url = "ftp.ngdc.noaa.gov";
-//		String ftpPath = "/ionosonde/data/" + station;
-		String ftpPath = "/ionosonde/data/IC437/individual/2018/060/scaled/";
-		String localPath = "D:\\Data\\";
-		
-		FTPClient ftp = new FTPClient();
-		
 		try {
+			String url = "ftp.ngdc.noaa.gov";
+			String ftpPath = "/ionosonde/data/" + station + "/individual";
+			String yearPath = "";
+			String doyPath = "";
+			String dirPath = "";
+			String fileName = "";
+			String ext = "";
+			String localPath = "D:\\Data\\Ionosonde\\" + station + "\\";
+			
+			FTPClient ftp = new FTPClient();
 			ftp.connect(url);
-//			ftpStatus(ftp);
 			
 			ftp.enterLocalPassiveMode();
 			ftp.login("anonymous", "");
-			ftpStatus(ftp);
 			
-			ftp.changeWorkingDirectory(ftpPath);
-//			ftpStatus(ftp);
-			
-			System.out.print("listDirectories: ");
-			FTPFile[] files = ftp.listFiles();
-			System.out.println(files.length);
-//			for (int i = 0; i < files.length; i++) {
-//				System.out.println("file: " + files[i].toString());
-//			}
-			ftpStatus(ftp);
-			
-//			System.out.print("listNames: ");
-//			String[] names = client.listNames();
-//			System.out.println(names.length);
+			FTPFile[] yearList = ftp.listFiles(ftpPath);
+			for (FTPFile year : yearList) {
+				
+				String tempYear = year.getName(); // year
+				System.out.println(tempYear);
+				if (Integer.parseInt(tempYear) >= 0) { // year check
+					
+					yearPath = ftpPath + "/" + tempYear;
+					FTPFile[] doyList = ftp.listDirectories(yearPath);
+					if (doyList.length != 0) {
+						for (FTPFile doy : doyList) {
+							
+							String tempDoy = doy.getName(); // doy : day of year
+							System.out.print(tempDoy + ": ");
+							doyPath = yearPath + "/" + tempDoy;
+							
+							if (1 != 0) {
+								FTPFile[] dirList = ftp.listDirectories(doyPath);
+								for (FTPFile dir : dirList) {							
+									if ("scaled".equals(dir.getName())) {
+										dirPath = doyPath + "/scaled";
+										ftp.changeWorkingDirectory(dirPath);
+										ftpStatus(ftp);
+										
+										FTPFile[] fileList = ftp.listFiles();
+										for (FTPFile file : fileList) {
+											
+											fileName = file.getName();
+											ext = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length());
+											if ("XML".equals(ext)) {
+												File xmlFilePath = new File(localPath + fileName);
+												OutputStream os = new FileOutputStream(xmlFilePath);
+											    ftp.retrieveFile(fileName, os);
+											    
+											    if (setXml(xmlFilePath) == 1) {
+											    	XmlVO xml = new XmlVO(station, tempYear, tempDoy, fileName);
+											    	dm.setXmlList(xml);
+											    	System.out.println(xml.toString());
+											    }
+											    
+											}
+											
+										}
+										
+									}
+									
+								}
+								
+							}
+							
+						}
+						
+					}
+					
+				}
+				
+			}
 			
 			ftp.logout();
-			System.out.println("logout");
 			ftp.disconnect();
-			System.out.println("disconnect");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -89,7 +130,8 @@ public class DataService {
 	}
 	
 	// xml 파일 읽어서 db에 데이터 저장
-	public void setXml(File file) {
+	public int setXml(File file) {
+		int result = -1;
 		try {
 			DataVO dvo = new DataVO();
 			String fileName = file.getName().toString();
@@ -124,12 +166,13 @@ public class DataService {
 					break;
 				}
 			}
-			dm.setData(dvo);
+			result = dm.setIonoData(dvo);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
+		return result;
 	}
 	
 }
