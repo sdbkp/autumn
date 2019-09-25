@@ -25,6 +25,7 @@ import org.w3c.dom.NodeList;
 import spring.project.autumn.mapper.DataMapper;
 import spring.project.autumn.vo.DataVO;
 import spring.project.autumn.vo.FileVO;
+import spring.project.autumn.vo.TableNameVO;
 
 @Service
 public class DataService {
@@ -37,23 +38,31 @@ public class DataService {
 			"IC437", "JJ433"	
 		};
 		
-		for (String station : stations) {		
-			getSao(station);
+		
+		
+		for (String station : stations) {
+			FileVO fvo = null;
+			TableNameVO tvo = new TableNameVO(station);
+			
+			if (dm.tableCount(tvo) != 0) {
+				fvo = dm.getSaoList(tvo);
+			} else {
+				fvo = new FileVO(station, "0", "0", "");
+			}
+			
+			getSao(fvo);
 		}
 		
 		System.out.println("End setData()");
 	}
 	
-	public void getSao(String station) {
+	public void getSao(FileVO fvo) {
 		try {
+			String station = fvo.getStation();
 			String url = "ftp.ngdc.noaa.gov";
 			String ftpPath = "/ionosonde/data/" + station + "/individual";
-			String yearPath = "";
-			String doyPath = "";
-			String dirPath = "";
-			String fileName = "";
-			String ext = "";
-			String localPath = "D:\\Data\\Ionosonde\\" + station + "\\";
+			String yearPath, doyPath, dirPath, fileName, ext;
+			int time1, time2;
 			
 			FTPClient ftp = new FTPClient();
 			ftp.connect(url);
@@ -63,41 +72,64 @@ public class DataService {
 			
 			FTPFile[] yearList = ftp.listFiles(ftpPath);
 			for (FTPFile year : yearList) {
-				
 				String tempYear = year.getName(); // year
 				System.out.println(tempYear);
-			
-				yearPath = ftpPath + "/" + tempYear;
-				FTPFile[] doyList = ftp.listDirectories(yearPath);
-				if (doyList.length != 0) {
-					for (FTPFile doy : doyList) {
+				
+				if (Integer.parseInt(tempYear) >= Integer.parseInt(fvo.getYear())) {
+					yearPath = ftpPath + "/" + tempYear;
+					FTPFile[] doyList = ftp.listDirectories(yearPath);
+					
+					if (doyList.length != 0) {
+						for (FTPFile doy : doyList) {
 
-						String tempDoy = doy.getName(); // doy : day of year
-						System.out.print(tempDoy + ": ");
-						doyPath = yearPath + "/" + tempDoy;
-						
-						FTPFile[] dirList = ftp.listDirectories(doyPath);
-						for (FTPFile dir : dirList) {
-							if ("scaled".equals(dir.getName())) {
-								dirPath = doyPath + "/scaled";
-								ftp.changeWorkingDirectory(dirPath);
-								ftpStatus(ftp);
+							String tempDoy = doy.getName(); // doy : day of year
+							System.out.print(tempDoy + ": ");
+							
+							// tempYear == fvo.getYear
+							boolean get1 = true;
+							if (Integer.parseInt(tempYear) == Integer.parseInt(fvo.getYear()) && Integer.parseInt(tempDoy) < Integer.parseInt(fvo.getDoy())) {
+								get1 = false;
+							}
+							System.out.println("tempDoy: " + tempDoy + " getDoy: " + fvo.getDoy());
+							if (get1) {
+								doyPath = yearPath + "/" + tempDoy;
 								
-								FTPFile[] fileList = ftp.listFiles();
-								for (FTPFile file : fileList) {											
-									
-									fileName = file.getName();
-									ext = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length());
-									if ("SAO".equals(ext)) {
+								FTPFile[] dirList = ftp.listDirectories(doyPath);
+								for (FTPFile dir : dirList) {
+									if ("scaled".equals(dir.getName())) {
+										dirPath = doyPath + "/scaled";
+										ftp.changeWorkingDirectory(dirPath);
+										ftpStatus(ftp);
 										
-										InputStream is = ftp.retrieveFileStream(fileName);
-										if (setSao(is) == 1) {
-											FileVO sao = new FileVO(station, tempYear, tempDoy, fileName);
-											dm.setSaoList(sao);
-											System.out.println(sao.toString());
+										FTPFile[] fileList = ftp.listFiles();
+										for (FTPFile file : fileList) {											
+											
+											fileName = file.getName();
+											ext = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length());
+											if ("SAO".equals(ext)) {
+												 
+												time1 = Integer.parseInt(fileName.substring(13, 19));
+												time2 = Integer.parseInt(fvo.getFileName().substring(13, 19));
+												
+												boolean get2 = true;
+												if (Integer.parseInt(tempYear) == Integer.parseInt(fvo.getYear()) && Integer.parseInt(tempDoy) == Integer.parseInt(fvo.getDoy()) && time1 <= time2) {
+													get2 = false;
+												}
+												
+												if (get2) {
+													InputStream is = ftp.retrieveFileStream(fileName);
+													if (setSao(is) == 1) {
+														FileVO sao = new FileVO(station, tempYear, tempDoy, fileName);
+														dm.setSaoList(sao);
+														System.out.println(sao.toString());
+													}
+													ftp.completePendingCommand();
+													is.close();
+												}
+												
+											}
+											
 										}
-										ftp.completePendingCommand();
-										is.close();
 										
 									}
 									

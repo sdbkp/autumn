@@ -13,4 +13,11 @@
 		values (#{station}, #{year}, #{doy}, #{fileName})
 	</insert>
 	
+	<select id="tableCount" resultType="Integer">
+		select count(*) from ${tableName}
+	</select>
+	
+	<select id="getSaoList" resultType="FileVO">
+		select station, `year`, `doy`, `fileName` from files where station = #{tableName} order by `no` desc limit 1
+	</select>
 </mapper>

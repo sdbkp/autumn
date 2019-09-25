@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+	<typeAliases>
+		<typeAlias type="spring.project.autumn.vo.FileVO" alias="FileVO"/>
+	</typeAliases>
+</configuration>
+<!--<mappers>
+	<typeAlias type="kr.harin.test.mapper.UserMapper" alias="UserMapper"/>
+		<mapper resource="mappers/user-mapper.xml"/>
+	</mappers>  -->
