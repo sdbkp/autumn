@@ -11,7 +11,6 @@ import spring.project.autumn.vo.FileVO;
 public interface DataMapper {
 
 	public int setIonoData(DataVO dvo);
-	public int setXmlList(FileVO xvo);
-	public FileVO getXmlList(FileVO xvo);
+	public int setSaoList(FileVO xvo);
 	
 }

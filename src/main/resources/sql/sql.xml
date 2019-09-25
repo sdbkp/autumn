@@ -8,12 +8,9 @@
 		values (#{year}, #{doy}, #{month}, #{day}, #{hh}, #{mm}, #{foF2}, #{foEs}, #{hmF2}, #{hpEs})
 	</insert>
 	
-	<insert id="setXmlList">
+	<insert id="setSaoList">
 		insert into files (station, `year`, `doy`, `fileName`) 
 		values (#{station}, #{year}, #{doy}, #{fileName})
 	</insert>
 	
-	<select id="getXmlList" resultType="spring.project.autumn.vo.FileVO">
-		select * from files where station = #{station} order by `no` desc limit 1
-	</select>
 </mapper>

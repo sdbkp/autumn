@@ -37,11 +37,10 @@ public class DataService {
 			"IC437", "JJ433"	
 		};
 		
-//		for (String station : stations) {		
-//			getXml(station);
-//		}
+		for (String station : stations) {		
+			getSao(station);
+		}
 		
-		getSao("IC437");
 		System.out.println("End setData()");
 	}
 	
@@ -67,43 +66,38 @@ public class DataService {
 				
 				String tempYear = year.getName(); // year
 				System.out.println(tempYear);
-				if (Integer.parseInt(tempYear) >= 0) { // year check
-					
-					yearPath = ftpPath + "/" + tempYear;
-					FTPFile[] doyList = ftp.listDirectories(yearPath);
-					if (doyList.length != 0) {
-						for (FTPFile doy : doyList) {
-							
-							String tempDoy = doy.getName(); // doy : day of year
-							System.out.print(tempDoy + ": ");
-							doyPath = yearPath + "/" + tempDoy;
-							
-							if (1 != 0) {
-								FTPFile[] dirList = ftp.listDirectories(doyPath);
-								for (FTPFile dir : dirList) {							
-									if ("scaled".equals(dir.getName())) {
-										dirPath = doyPath + "/scaled";
-										ftp.changeWorkingDirectory(dirPath);
-										ftpStatus(ftp);
+			
+				yearPath = ftpPath + "/" + tempYear;
+				FTPFile[] doyList = ftp.listDirectories(yearPath);
+				if (doyList.length != 0) {
+					for (FTPFile doy : doyList) {
+
+						String tempDoy = doy.getName(); // doy : day of year
+						System.out.print(tempDoy + ": ");
+						doyPath = yearPath + "/" + tempDoy;
+						
+						FTPFile[] dirList = ftp.listDirectories(doyPath);
+						for (FTPFile dir : dirList) {
+							if ("scaled".equals(dir.getName())) {
+								dirPath = doyPath + "/scaled";
+								ftp.changeWorkingDirectory(dirPath);
+								ftpStatus(ftp);
+								
+								FTPFile[] fileList = ftp.listFiles();
+								for (FTPFile file : fileList) {											
+									
+									fileName = file.getName();
+									ext = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length());
+									if ("SAO".equals(ext)) {
 										
-										FTPFile[] fileList = ftp.listFiles();
-										for (FTPFile file : fileList) {
-											
-											fileName = file.getName();
-											ext = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length());
-											if ("SAO".equals(ext)) {
-												
-												InputStream is = ftp.retrieveFileStream(fileName);
-												if (setSao(is) == 1) {
-													FileVO sao = new FileVO(station, tempYear, tempDoy, fileName);
-											    	dm.setXmlList(sao);
-											    	System.out.println(sao.toString());
-												}
-												
-											    
-											}
-											
+										InputStream is = ftp.retrieveFileStream(fileName);
+										if (setSao(is) == 1) {
+											FileVO sao = new FileVO(station, tempYear, tempDoy, fileName);
+											dm.setSaoList(sao);
+											System.out.println(sao.toString());
 										}
+										ftp.completePendingCommand();
+										is.close();
 										
 									}
 									
@@ -117,7 +111,7 @@ public class DataService {
 					
 				}
 				
-			}
+			}	
 			
 			ftp.logout();
 			ftp.disconnect();
@@ -141,7 +135,6 @@ public class DataService {
 		int result = -1;
 		
 		try {
-//			BufferedReader br = new BufferedReader(new FileReader(file));
 			BufferedReader br = new BufferedReader(new InputStreamReader(is));
 			String line = null;
 			while ((line = br.readLine()) != null) {
@@ -161,6 +154,7 @@ public class DataService {
 			float hpEs = Float.parseFloat(data.get(5).substring(104, 112));
 			result = dm.setIonoData(new DataVO(station, year, doy, month, day, hh, mm, foF2, foEs, hmF2, hpEs));
 			
+			br.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -169,49 +163,49 @@ public class DataService {
 	}
 	
 	// xml 파일 읽어서 db에 데이터 저장
-	public int setXml(File file) {
-		int result = -1;
-		try {
-			DataVO dvo = new DataVO();
-			String fileName = file.getName().toString();
-			dvo.setStation(fileName.substring(0, 5));
-			dvo.setYear(Integer.parseInt(fileName.substring(6, 10)));
-			dvo.setDoy(Integer.parseInt(fileName.substring(10, 13)));
-			dvo.setHh(Integer.parseInt(fileName.substring(13, 15)));
-			dvo.setMm(Integer.parseInt(fileName.substring(15, 17)));
-			
-			DocumentBuilderFactory dFactory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder dBuilder = dFactory.newDocumentBuilder();
-			Document doc =  dBuilder.parse(file);
-			doc.getDocumentElement().normalize();
-			NodeList nList = doc.getElementsByTagName("URSI");
-
-			for (int i = 0; i < nList.getLength(); i++) {
-				Element el = (Element) nList.item(i);
-				String name = el.getAttributes().getNamedItem("Name").getNodeValue().toString();
-				
-				switch (name) {
-				case "foF2":
-					dvo.setFoF2(Float.parseFloat(el.getAttributes().getNamedItem("Val").getNodeValue().toString()));
-					break;
-				case "foEs":
-					dvo.setFoEs(Float.parseFloat(el.getAttributes().getNamedItem("Val").getNodeValue().toString()));
-					break;
-				case "hmF2":
-					dvo.setHmF2(Float.parseFloat(el.getAttributes().getNamedItem("Val").getNodeValue().toString()));
-					break;
-				case "h`Es":
-					dvo.setHpEs(Float.parseFloat(el.getAttributes().getNamedItem("Val").getNodeValue().toString()));
-					break;
-				}
-			}
-			result = dm.setIonoData(dvo);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return result;
-	}
+//	public int setXml(File file) {
+//		int result = -1;
+//		try {
+//			DataVO dvo = new DataVO();
+//			String fileName = file.getName().toString();
+//			dvo.setStation(fileName.substring(0, 5));
+//			dvo.setYear(Integer.parseInt(fileName.substring(6, 10)));
+//			dvo.setDoy(Integer.parseInt(fileName.substring(10, 13)));
+//			dvo.setHh(Integer.parseInt(fileName.substring(13, 15)));
+//			dvo.setMm(Integer.parseInt(fileName.substring(15, 17)));
+//			
+//			DocumentBuilderFactory dFactory = DocumentBuilderFactory.newInstance();
+//			DocumentBuilder dBuilder = dFactory.newDocumentBuilder();
+//			Document doc =  dBuilder.parse(file);
+//			doc.getDocumentElement().normalize();
+//			NodeList nList = doc.getElementsByTagName("URSI");
+//
+//			for (int i = 0; i < nList.getLength(); i++) {
+//				Element el = (Element) nList.item(i);
+//				String name = el.getAttributes().getNamedItem("Name").getNodeValue().toString();
+//				
+//				switch (name) {
+//				case "foF2":
+//					dvo.setFoF2(Float.parseFloat(el.getAttributes().getNamedItem("Val").getNodeValue().toString()));
+//					break;
+//				case "foEs":
+//					dvo.setFoEs(Float.parseFloat(el.getAttributes().getNamedItem("Val").getNodeValue().toString()));
+//					break;
+//				case "hmF2":
+//					dvo.setHmF2(Float.parseFloat(el.getAttributes().getNamedItem("Val").getNodeValue().toString()));
+//					break;
+//				case "h`Es":
+//					dvo.setHpEs(Float.parseFloat(el.getAttributes().getNamedItem("Val").getNodeValue().toString()));
+//					break;
+//				}
+//			}
+//			result = dm.setIonoData(dvo);
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		
+//		return result;
+//	}
 	
 }

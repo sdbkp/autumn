@@ -51,7 +51,7 @@ public class FileVO {
 
 	@Override
 	public String toString() {
-		return "XmlVO [station=" + station + ", year=" + year + ", doy=" + doy + ", fileName=" + fileName + "]";
+		return "FileVO [station=" + station + ", year=" + year + ", doy=" + doy + ", fileName=" + fileName + "]";
 	}
 	
 }
