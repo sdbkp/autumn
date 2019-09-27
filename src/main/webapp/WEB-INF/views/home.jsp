@@ -24,8 +24,9 @@
     
     <nav>
     	<ul>
-            <li>Home</li>
+            <li style="background-color: #EFF5FB;">Home</li>
             <a href="/update"><li>Update</li></a>
+            
         </ul>
     </nav>
     

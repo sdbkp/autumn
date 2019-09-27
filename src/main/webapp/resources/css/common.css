@@ -31,14 +31,21 @@ nav {
 
 ul {
     list-style: none;
-    padding: 20px;
-    
+    padding: 0;
 }
 
 li {
-    font-size: 20px;
-    margin-bottom: 15px;
+    font-size: 18px;
+    padding: 15px 20px;
     color: #424242;
+}
+
+li:hover {
+    background-color: #EFF5FB;
+}
+
+a:hover {
+    text-decoration: none;
 }
 
 .container {
