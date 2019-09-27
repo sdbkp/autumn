@@ -17,7 +17,11 @@
 		select count(*) from ${tableName}
 	</select>
 	
-	<select id="getSaoList" resultType="FileVO">
-		select station, `year`, `doy`, `fileName` from files where station = #{tableName} order by `no` desc limit 1
+	<select id="getSaoInfo" resultType="FileVO">
+		select station, `year`, `doy`, `fileName`, setTime from files where station = #{tableName} order by `no` desc limit 1
+	</select>
+	
+	<select id="getStations" resultType="hashmap">
+		select * from stations
 	</select>
 </mapper>

@@ -6,6 +6,7 @@ public class FileVO {
 	String year;
 	String doy;
 	String fileName;
+	String setTime;
 	
 	public FileVO() {	
 	}
@@ -48,10 +49,19 @@ public class FileVO {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
+	
+	public String getSetTime() {
+		return setTime;
+	}
+
+	public void setSetTime(String setTime) {
+		this.setTime = setTime;
+	}
 
 	@Override
 	public String toString() {
-		return "FileVO [station=" + station + ", year=" + year + ", doy=" + doy + ", fileName=" + fileName + "]";
+		return "FileVO [station=" + station + ", year=" + year + ", doy=" + doy + ", fileName=" + fileName
+				+ ", setTime=" + setTime + "]";
 	}
 	
 }

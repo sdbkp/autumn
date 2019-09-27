@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -22,28 +23,29 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import net.sf.json.JSONObject;
 import spring.project.autumn.mapper.DataMapper;
 import spring.project.autumn.vo.DataVO;
 import spring.project.autumn.vo.FileVO;
 import spring.project.autumn.vo.TableNameVO;
 
 @Service
-public class SaoService {
+public class DataService {
 	
 	@Autowired
 	DataMapper dm;
 	
 	public void setData() {
-		String[] stations = {
-			"IC437" //, "JJ433"	
-		};
+		List<HashMap<String, Object>> stations = dm.getStations();
+		String station;
 		
-		for (String station : stations) {
+		for (int i = 0; i < stations.size(); i++) {
+			station = stations.get(i).get("station").toString();
 			FileVO fvo = null;
 			TableNameVO tvo = new TableNameVO(station);
 			
 			if (dm.tableCount(tvo) != 0) {
-				fvo = dm.getSaoList(tvo);
+				fvo = dm.getSaoInfo(tvo);
 			} else {
 				fvo = new FileVO(station, "-1", "-1", "");
 			}
@@ -52,6 +54,24 @@ public class SaoService {
 		}
 		
 		System.out.println("End setData()");
+	}
+	
+	public JSONObject updateInfo() {
+		List<HashMap<String, Object>> stations = dm.getStations();
+		List<FileVO> updateList = new ArrayList<FileVO>();
+		HashMap<String, List<FileVO>> resultMap = new HashMap<String, List<FileVO>>();
+		
+		for (int i = 0; i < stations.size(); i++) {
+			TableNameVO tvo = new TableNameVO(stations.get(i).get("station").toString());
+			
+			if (dm.tableCount(tvo) != 0) {
+				updateList.add(dm.getSaoInfo(tvo));
+			}
+			
+		}
+		resultMap.put("result", updateList);
+		
+		return JSONObject.fromObject(resultMap);
 	}
 	
 	public void getSao(FileVO fvo) {

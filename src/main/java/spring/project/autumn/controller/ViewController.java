@@ -8,7 +8,6 @@ public class ViewController {
 	
 	@GetMapping("/")
 	public String update() {
-		System.out.println("update()");
 		return "data/update";
 	}
 	
