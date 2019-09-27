@@ -32,7 +32,6 @@
            			   method: "POST"
            		   }).then(function(res) {
            			   $scope.updateList = res.data.result;
-           			   console.log(res.data.result);
            		   })
            	   }
            	   $scope.updateInfo();
