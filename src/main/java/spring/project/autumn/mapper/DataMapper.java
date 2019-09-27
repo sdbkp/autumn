@@ -1,7 +1,5 @@
 package spring.project.autumn.mapper;
 
-import java.util.HashMap;
-
 import org.apache.ibatis.annotations.Mapper;
 
 import spring.project.autumn.vo.DataVO;

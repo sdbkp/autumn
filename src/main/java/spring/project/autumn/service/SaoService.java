@@ -28,17 +28,15 @@ import spring.project.autumn.vo.FileVO;
 import spring.project.autumn.vo.TableNameVO;
 
 @Service
-public class DataService {
+public class SaoService {
 	
 	@Autowired
 	DataMapper dm;
 	
 	public void setData() {
 		String[] stations = {
-			"IC437", "JJ433"	
+			"IC437" //, "JJ433"	
 		};
-		
-		
 		
 		for (String station : stations) {
 			FileVO fvo = null;
@@ -47,7 +45,7 @@ public class DataService {
 			if (dm.tableCount(tvo) != 0) {
 				fvo = dm.getSaoList(tvo);
 			} else {
-				fvo = new FileVO(station, "0", "0", "");
+				fvo = new FileVO(station, "-1", "-1", "");
 			}
 			
 			getSao(fvo);
@@ -66,7 +64,6 @@ public class DataService {
 			
 			FTPClient ftp = new FTPClient();
 			ftp.connect(url);
-			
 			ftp.enterLocalPassiveMode();
 			ftp.login("anonymous", "");
 			
@@ -77,23 +74,29 @@ public class DataService {
 				
 				if (Integer.parseInt(tempYear) >= Integer.parseInt(fvo.getYear())) {
 					yearPath = ftpPath + "/" + tempYear;
+					
+					
 					FTPFile[] doyList = ftp.listDirectories(yearPath);
 					
 					if (doyList.length != 0) {
 						for (FTPFile doy : doyList) {
-
-							String tempDoy = doy.getName(); // doy : day of year
-							System.out.print(tempDoy + ": ");
 							
-							// tempYear == fvo.getYear
+							String tempDoy = doy.getName(); // doy : day of year
+							
 							boolean get1 = true;
 							if (Integer.parseInt(tempYear) == Integer.parseInt(fvo.getYear()) && Integer.parseInt(tempDoy) < Integer.parseInt(fvo.getDoy())) {
 								get1 = false;
 							}
-							System.out.println("tempDoy: " + tempDoy + " getDoy: " + fvo.getDoy());
+							
 							if (get1) {
-								doyPath = yearPath + "/" + tempDoy;
+								ftp.logout();
+								ftp.disconnect();
+								ftp.connect(url);
+								ftp.enterLocalPassiveMode();
+								ftp.login("anonymous", "");
 								
+								doyPath = yearPath + "/" + tempDoy;
+								System.out.print(tempDoy + ": ");
 								FTPFile[] dirList = ftp.listDirectories(doyPath);
 								for (FTPFile dir : dirList) {
 									if ("scaled".equals(dir.getName())) {
@@ -145,8 +148,7 @@ public class DataService {
 				
 			}	
 			
-			ftp.logout();
-			ftp.disconnect();
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
