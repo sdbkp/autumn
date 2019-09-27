@@ -43,7 +43,12 @@
 <body data-ng-app="ngApp", data-ng-controller="ngCtrl">
     <header><h1>SSLAB</h1></header>
     
-    <nav></nav>
+    <nav>
+    	<ul>
+    		<a href="/"><li>Home</li></a>
+            <li>Update</li>
+        </ul>
+    </nav>
     
     <div class="container">
         <div class="table-container">

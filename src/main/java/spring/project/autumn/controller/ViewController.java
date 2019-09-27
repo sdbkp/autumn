@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ViewController {
 	
 	@GetMapping("/")
+	public String home() {
+		return "home";
+	}
+	
+	@GetMapping("/update")
 	public String update() {
 		return "data/update";
 	}

@@ -15,6 +15,9 @@ header {
     align-items: center;
     position: fixed;
     background-color: #EFF5FB;
+    border-bottom: 1px solid #CEE3F6;
+    box-sizing: border-box;
+    color: #424242;
 }
 
 nav {
@@ -22,8 +25,20 @@ nav {
     height: calc(100vh - 150px);
     margin-top: 150px;
     position: fixed;
-    border: 5px solid greenyellow;
+    border-right: 1px solid #CEE3F6;
     box-sizing: border-box;
+}
+
+ul {
+    list-style: none;
+    padding: 20px;
+    
+}
+
+li {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #424242;
 }
 
 .container {
@@ -31,8 +46,8 @@ nav {
     height: 200vh;
     margin-top: 150px;
     float: right;
-    border: 5px solid aquamarine;
-    box-sizing: border-box;
+    /*border: 5px solid aquamarine;
+    box-sizing: border-box;*/
     padding: 0;
 }
 
