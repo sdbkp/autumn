@@ -12,6 +12,9 @@
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script> -->
     <script>
         angular.module("ngApp", [])
                .controller("ngCtrl", function($scope, $http) {
@@ -25,13 +28,12 @@
     <nav>
     	<ul>
             <li style="background-color: #EFF5FB;">Home</li>
-            <a href="/update"><li>Update</li></a>
-            
+            <a href="/IC437"><li>IC437</li></a>
+            <a href="/update"><li>Data Update</li></a>
         </ul>
     </nav>
     
     <div class="container">
-        
     </div>
 </body>
 </html>

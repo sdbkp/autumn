@@ -1,36 +1,25 @@
 package spring.project.autumn.service;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 
 import net.sf.json.JSONObject;
 import spring.project.autumn.mapper.DataMapper;
 import spring.project.autumn.vo.DataVO;
 import spring.project.autumn.vo.FileVO;
-import spring.project.autumn.vo.TableNameVO;
+import spring.project.autumn.vo.TableVO;
 
 @Service
-public class DataService {
+public class SaoService {
 	
 	@Autowired
 	DataMapper dm;
@@ -42,7 +31,7 @@ public class DataService {
 		for (int i = 0; i < stations.size(); i++) {
 			station = stations.get(i).get("station").toString();
 			FileVO fvo = null;
-			TableNameVO tvo = new TableNameVO(station);
+			TableVO tvo = new TableVO(station);
 			
 			if (dm.tableCount(tvo) != 0) {
 				fvo = dm.getSaoInfo(tvo);
@@ -62,7 +51,7 @@ public class DataService {
 		HashMap<String, List<FileVO>> resultMap = new HashMap<String, List<FileVO>>();
 		
 		for (int i = 0; i < stations.size(); i++) {
-			TableNameVO tvo = new TableNameVO(stations.get(i).get("station").toString());
+			TableVO tvo = new TableVO(stations.get(i).get("station").toString());
 			
 			if (dm.tableCount(tvo) != 0) {
 				updateList.add(dm.getSaoInfo(tvo));

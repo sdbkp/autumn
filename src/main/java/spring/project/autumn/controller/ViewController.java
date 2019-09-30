@@ -13,7 +13,11 @@ public class ViewController {
 	
 	@GetMapping("/update")
 	public String update() {
-		return "data/update";
+		return "board/update";
 	}
 	
+	@GetMapping("/{sation}")
+	public String charts() {
+		return "board/charts";
+	}
 }

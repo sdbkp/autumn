@@ -45,7 +45,8 @@
     <nav>
     	<ul>
     		<a href="/"><li>Home</li></a>
-            <li style="background-color: #EFF5FB;">Update</li>
+    		<a href="/IC437"><li>IC437</li></a>
+            <li style="background-color: #EFF5FB;">Data Update</li>
         </ul>
     </nav>
     
