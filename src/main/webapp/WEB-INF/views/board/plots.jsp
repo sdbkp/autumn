@@ -284,22 +284,22 @@
     </nav>
     
     <div class="container">
-    	<div class="chart" data-ng-show="true">
+    	<div class="plot" data-ng-show="true">
     		<canvas id="annualMeanFoF2" data-ng-click=detail()></canvas>
     	</div>
-    	<div class="chart">
+    	<div class="plot">
     		<canvas id="annualMeanHmF2" data-ng-click=detail()></canvas>
     	</div>
-    	<div class="chart">
+    	<div class="plot">
     		<canvas id="monthlyMeanFoF2" data-ng-click=detail()></canvas>
     	</div>
-    	<div class="chart">
+    	<div class="plot">
     		<canvas id="monthlyMeanHmF2" data-ng-click=detail()></canvas>
     	</div>
-    	<div class="chart">
+    	<div class="plot">
     		<canvas id="hourlyMeanFoF2" data-ng-click=detail()></canvas>
     	</div>
-    	<div class="chart">
+    	<div class="plot">
     		<canvas id="hourlyMeanHmF2" data-ng-click=detail()></canvas>
     	</div>
     </div>

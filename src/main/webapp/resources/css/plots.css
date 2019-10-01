@@ -1,7 +1,10 @@
-.chart {
+.plot {
 	width: 50%;
-	padding: calc(2% - 10px);
-	float: left;
+	padding: calc(2% - 24px);
+	margin: auto;
+	display: inline-block;
+	margin: 0 auto;
+	margin-left: -4px;
 }
 
 canvas {
@@ -17,7 +20,7 @@ canvas:hover {
 }
 
 @media only screen and (max-width: 1000px) {
-	.chart {
+	.plot {
 	width: 100%; 
 	}
 }
