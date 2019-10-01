@@ -50,11 +50,8 @@ a:hover {
 
 .container {
     width: calc(100% - 250px);
-    height: 200vh;
     margin-top: 150px;
     float: right;
-    /*border: 5px solid aquamarine;
-    box-sizing: border-box;*/
     padding: 0;
 }
 

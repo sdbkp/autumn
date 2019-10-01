@@ -3,9 +3,8 @@ package spring.project.autumn.vo;
 public class TableVO {
 	
 	String tableName;
-	String column;
-	String target_1;
-	String target_2;
+	String frequency;
+	String height;
 	String group_1;
 	String group_2;
 	
@@ -16,20 +15,18 @@ public class TableVO {
 		this.tableName = tableName;
 	}
 	
-	public TableVO(String tableName, String column, String target_1, String target_2) {
+	public TableVO(String tableName, String frequency, String height, String group_1) {
 		this.tableName = tableName;
-		this.column = column;
-		this.target_1 = target_1;
-		this.target_2 = target_2;
-		this.group_1 = column;
+		this.frequency = frequency;
+		this.height = height;
+		this.group_1 = group_1;
 	}
 	
-	public TableVO(String tableName, String column, String target_1, String target_2, String group_2) {
+	public TableVO(String tableName, String frequency, String height, String group_1, String group_2) {
 		this.tableName = tableName;
-		this.column = column;
-		this.target_2 = target_1;
-		this.target_2 = target_2;
-		this.group_1 = column;
+		this.frequency = frequency;
+		this.height = height;
+		this.group_1 = group_1;
 		this.group_2 = group_2;
 	}
 	

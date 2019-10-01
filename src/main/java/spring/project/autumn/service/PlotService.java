@@ -10,14 +10,18 @@ import spring.project.autumn.mapper.DataMapper;
 import spring.project.autumn.vo.TableVO;
 
 @Service
-public class ChartService {
+public class PlotService {
 	
 	@Autowired
 	DataMapper dm;
 	
-	public JSONObject annualMean(String station) {
+	public JSONObject avgAll(String station) {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
-		resultMap.put("avgF2", dm.avgF2(new TableVO(station, "year", "foF2", "hmF2")));
+		
+		resultMap.put("avgEsYear", dm.avgF2(new TableVO(station, "foEs", "hpEs", "year")));
+		resultMap.put("avgEsMonth", dm.avgF2(new TableVO(station, "foEs", "hpEs", "month")));
+		resultMap.put("avgEsHour", dm.avgF2(new TableVO(station, "foEs", "hpEs", "hh")));
+		
 		return JSONObject.fromObject(resultMap);
 	}
 	

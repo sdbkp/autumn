@@ -26,7 +26,7 @@
 	</select>
 	
 	<select id="avgF2" resultType="hashmap">
-		select `${column}`, round(avg(${target_1}),2) as foF2, round(avg(${target_2})) as hmF2 from ${tableName}_copy where ${target_1} != 9999 and ${target_2} != 9999 group by ${group_1}
+		select `${group_1}`, round(avg(${frequency}),2) as frequency, round(avg(${height}), 2) as height from ${tableName}_copy where ${frequency} != 9999 and ${height} != 9999 group by ${group_1}
 	</select>
 	
 </mapper>

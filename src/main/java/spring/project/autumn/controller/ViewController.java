@@ -18,6 +18,6 @@ public class ViewController {
 	
 	@GetMapping("/{sation}")
 	public String charts() {
-		return "board/charts";
+		return "board/plots";
 	}
 }
