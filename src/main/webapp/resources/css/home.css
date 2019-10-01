@@ -1,0 +1,33 @@
+.inner-container-1, .inner-container-2 {
+	text-align: center;
+	width: 50%;
+	min-width: 500px;
+	float: left;
+	padding: 50px;
+}
+
+.inner-container-2 {
+	padding-left: 0;	
+}
+
+img {
+	margin-bottom: 30px;
+	width: 100%;
+	max-width: 500px;
+}
+
+@media only screen and (max-width: 1250px) {
+	.inner-container-1, .inner-container-2 {
+		width: 80%;
+		float: none;
+		margin: auto;
+	}
+	
+	.inner-container-1 {
+		padding-bottom: 30px;
+	}
+	.inner-container-2 {
+		padding-top: 0;
+		padding-left: 50px;
+	}
+}

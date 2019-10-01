@@ -65,18 +65,22 @@
 							},
 							options: {
 								scales: {
+									xAxes: [{
+										gridLines: {
+											display: false
+										}, 
+										scaleLabel: {
+											display: true,
+											labelString: 'Year'
+										}
+									}],
 									yAxes: [{
 										gridLines: {
 											display: false
 										}, 
 										scaleLabel: {
 											display: true,
-											labelString: 'probability'
-										}
-									}],
-									xAxes: [{
-										gridLines: {
-											display: false
+											labelString: 'foEs (MHz)'
 										}
 									}]
 								}
@@ -96,14 +100,22 @@
 							},
 							options: {
 								scales: {
-									yAxes: [{
-										gridLines: {
-											display: false
-										}
-									}],
 									xAxes: [{
 										gridLines: {
 											display: false
+										}, 
+										scaleLabel: {
+											display: true,
+											labelString: 'Year'
+										}
+									}],
+									yAxes: [{
+										gridLines: {
+											display: false
+										}, 
+										scaleLabel: {
+											display: true,
+											labelString: "h'Es (km)"
 										}
 									}]
 								}
@@ -123,14 +135,22 @@
 							},
 							options: {
 								scales: {
-									yAxes: [{
-										gridLines: {
-											display: false
-										}
-									}],
 									xAxes: [{
 										gridLines: {
 											display: false
+										}, 
+										scaleLabel: {
+											display: true,
+											labelString: 'Month'
+										}
+									}],
+									yAxes: [{
+										gridLines: {
+											display: false
+										}, 
+										scaleLabel: {
+											display: true,
+											labelString: 'foEs (MHz)'
 										}
 									}]
 								}
@@ -150,14 +170,22 @@
 							},
 							options: {
 								scales: {
-									yAxes: [{
-										gridLines: {
-											display: false
-										}
-									}],
 									xAxes: [{
 										gridLines: {
 											display: false
+										}, 
+										scaleLabel: {
+											display: true,
+											labelString: 'Month'
+										}
+									}],
+									yAxes: [{
+										gridLines: {
+											display: false
+										}, 
+										scaleLabel: {
+											display: true,
+											labelString: "h'Es (km)"
 										}
 									}]
 								}
@@ -177,14 +205,22 @@
 							},
 							options: {
 								scales: {
-									yAxes: [{
-										gridLines: {
-											display: false
-										}
-									}],
 									xAxes: [{
 										gridLines: {
 											display: false
+										}, 
+										scaleLabel: {
+											display: true,
+											labelString: 'UT'
+										}
+									}],
+									yAxes: [{
+										gridLines: {
+											display: false
+										}, 
+										scaleLabel: {
+											display: true,
+											labelString: 'foEs (MHz)'
 										}
 									}]
 								}
@@ -204,14 +240,22 @@
 							},
 							options: {
 								scales: {
-									yAxes: [{
-										gridLines: {
-											display: false
-										}
-									}],
 									xAxes: [{
 										gridLines: {
 											display: false
+										}, 
+										scaleLabel: {
+											display: true,
+											labelString: 'UT'
+										}
+									}],
+									yAxes: [{
+										gridLines: {
+											display: false
+										}, 
+										scaleLabel: {
+											display: true,
+											labelString: "h'Es (km)"
 										}
 									}]
 								}
