@@ -19,72 +19,14 @@
         angular.module("ngApp", [])
                .controller("ngCtrl", function($scope, $http) {
                
-            	var annualLabels = [];
-            	var annualfoF2 = [];
-            	var annualhmF2 = [];
+            	$scope.test = function() {
+            		$http({
+            			url: location.href,
+            			method: "POST"
+            		})
+            	}
+            	$scope.test();
             	
-				$scope.annual = function() {
-					$http({
-						url: location.href + "/annualMean",
-						method: "POST"
-					}).then(function(res) {
-						$scope.annualData = res.data.annualMean;
-						
-						for (var i = 0; i < $scope.annualData.length; i++) {
-							annualLabels.push($scope.annualData[i].year);
-							annualfoF2.push($scope.annualData[i].foF2);
-							annualhmF2.push($scope.annualData[i].hmF2);
-						}
-						
-						var chart_1 = new Chart(document.getElementById("annualMean").getContext('2d'), {
-							type: 'line',
-							data: {
-								labels: annualLabels,
-								datasets: [{
-									label: "Annual Mean foF2",
-									yAxisID: "foF2",
-									backgroundColor: 'rgba(0,0,0,0)',
-		        	    			borderColor: 'rgb(255, 99, 132)',
-									data: annualfoF2
-								} , {
-									label: "Annual Mean hmF2",
-									yAxisID: "hmF2",
-									backgroundColor: 'rgba(0,0,0,0)',
-									borderColor: 'rgb(0, 102, 255)',
-									data: annualhmF2
-								}]
-							},
-							options: {
-								scales: {
-									yAxes: [{
-										id: 'foF2',
-										type: "linear",
-										position: "left",
-										gridLines: {
-											display: false
-										}
-									}, {
-										id: "hmF2",
-										type: "linear",
-										position: "right",
-										gridLines: {
-											display: false
-										}
-										
-									}],
-									xAxes: [{
-										gridLines: {
-											display: false
-										}
-									}]
-								}
-							}
-						});
-						
-					});
-					
-				}
-				$scope.annual();
                
         })
     </script>
@@ -101,9 +43,7 @@
     </nav>
     
     <div class="container">
-    	<div class="chart-1">
-    		<canvas id="annualMean"></canvas>
-    	</div>
+    	
     </div>
 </body>
 </html>

@@ -25,4 +25,8 @@ public class PlotService {
 		return JSONObject.fromObject(resultMap);
 	}
 	
+	public JSONObject avg() {
+		
+		return null;
+	}
 }

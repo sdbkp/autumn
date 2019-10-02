@@ -40,7 +40,7 @@
     		<p>Typical profiles of neutral atmospheric temperature and ionospheric plasma density with the various layers [Kelley 2009].</p>
     	</div>
     	<div class="inner-container-2" style="text-align: justify;">
-    		<p>The Earth’s atmosphere is divided into the troposphere (0 – 12 km), stratosphere (12 – 50 km), 
+    		<p>&emsp;&emsp;&emsp;&emsp;The Earth’s atmosphere is divided into the troposphere (0 – 12 km), stratosphere (12 – 50 km), 
     			mesosphere (50 – 90 km), thermosphere (90 – 500 km), and exosphere according to the change of 
     			temperature with altitude as shown in Figure 2.1. In the troposphere, the temperature decreases 
     			away from the surface heated by solar radiation. The tropospheric temperature decreases as the 
@@ -52,7 +52,7 @@
     			in the exosphere, the temperature is constant due to extremely low atmospheric density.
     			</p>
     			
-    		<p>The ionosphere is classified according to atmospheric composition. In Figure 2.1, the ionosphere 
+    		<p>&emsp;&emsp;&emsp;&emsp;The ionosphere is classified according to atmospheric composition. In Figure 2.1, the ionosphere 
 	    		is divided into D, E and F layers from the surface according to distribution of the electron density 
 	    		and the F layer can be subdivided as F1 and F2 layers. The D region at an altitude of 60 – 90 km has 
 	    		a relatively less ionization and lower electron density than the other layers, therefore it does not 
@@ -64,7 +64,7 @@
 	    		and F2 region (200 – 1,000 km) during daytime and then the F1 layer disappears in the nighttime.
     		</p>
     		
-    		<p>The electron density of F2 layer is highest. The reason that the electron density of the ionosphere 
+    		<p>&emsp;&emsp;&emsp;&emsp;The electron density of F2 layer is highest. The reason that the electron density of the ionosphere 
     			shows different characteristics depending on the altitude is because the solar radiation is selectively 
     			absorbed and the composition and density of the atmosphere also differ with altitude. Thus, the 4 
     			separated ionospheric regions represent not only the altitudinal difference but also that each layer 

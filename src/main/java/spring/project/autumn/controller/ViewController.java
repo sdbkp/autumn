@@ -2,6 +2,7 @@ package spring.project.autumn.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class ViewController {
@@ -17,7 +18,12 @@ public class ViewController {
 	}
 	
 	@GetMapping("/{sation}")
-	public String charts() {
+	public String plots() {
 		return "board/plots";
+	}
+	
+	@GetMapping("/{station}/{path}")
+	public String detail() {
+		return "board/detail";
 	}
 }

@@ -36,12 +36,17 @@ public class DataController {
 	@Autowired
 	PlotService ps;
 	
-	@PostMapping("/{station}/plot")
+	@PostMapping("/{station}")
 	public void test(@PathVariable("station") String station, HttpServletResponse res) {
 		try {
 			res.getWriter().write(ps.avgAll(station).toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@PostMapping("/{station}/{path}")
+	public void detail(@PathVariable("path") String path) {
+		System.out.println("tt");
 	}
 }
