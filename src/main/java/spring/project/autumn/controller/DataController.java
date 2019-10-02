@@ -39,14 +39,19 @@ public class DataController {
 	@PostMapping("/{station}")
 	public void test(@PathVariable("station") String station, HttpServletResponse res) {
 		try {
-			res.getWriter().write(ps.avgAll(station).toString());
+			res.getWriter().write(ps.avgAll(station));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
 	@PostMapping("/{station}/{path}")
-	public void detail(@PathVariable("path") String path) {
-		System.out.println("tt");
+	public void detail(@PathVariable("station") String station, @PathVariable("path") String path, HttpServletResponse res) {
+		System.out.println("detail()");
+		try {
+			res.getWriter().write(ps.avg(station, path));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -22,4 +22,12 @@ public class TableVO {
 		this.group_1 = group_1;
 	}
 	
+	public TableVO(String tableName, String frequency, String height, String group_1, String group_2) {
+		this.tableName = tableName;
+		this.frequency = frequency;
+		this.height = height;
+		this.group_1 = group_1;
+		this.group_2 = group_2;
+	}
+	
 }

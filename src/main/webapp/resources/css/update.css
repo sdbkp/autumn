@@ -8,16 +8,3 @@ th {
 	margin-top: 50px;
 	text-align: right;
 }
-
-.button {
-	width: 100px;
-	height: 40px;
-	background-color: #EFF5FB;
-	border: none;
-	border-radius: 5px;
-	font-weight: bolder;
-}
-
-.button:hover {
-	background-color: #E0ECF8;
-}

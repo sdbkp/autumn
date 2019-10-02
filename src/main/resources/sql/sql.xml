@@ -25,8 +25,14 @@
 		select * from stations
 	</select>
 	
-	<select id="avgF2" resultType="hashmap">
-		select `${group_1}`, round(avg(${frequency}),2) as frequency, round(avg(${height}), 2) as height from ${tableName}_copy where ${frequency} != 9999 and ${height} != 9999 group by ${group_1}
+	<select id="avgAll" resultType="hashmap">
+		select `${group_1}`, round(avg(${frequency}),2) as frequency, round(avg(${height}),2) as height from ${tableName}_copy where ${frequency} != 9999 and ${height} != 9999 group by ${group_1}
 	</select>
+	
+	<select id="avg" resultType="hashmap">
+		<!-- select `year`, `month`, round(avg(foF2), 2) as foF2, round(avg(hmF2), 2) as hmF2 from IC437_copy where foF2 != 9999 and hmF2 != 9999 group by `year`, `month` -->
+		select `${group_1}`, `${group_2}`, round(avg(${frequency}),2) as frequency, round(avg(${height}),2) as height from ${tableName}_copy where ${frequency} != 9999 and ${height} != 9999 group by ${group_1}
+	</select>
+	
 	
 </mapper>
