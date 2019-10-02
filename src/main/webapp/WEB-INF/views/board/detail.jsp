@@ -14,7 +14,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script> -->
     <script>
         angular.module("ngApp", [])
                .controller("ngCtrl", function($scope, $http) {
@@ -27,7 +26,6 @@
             	}
             	$scope.test();
             	
-               
         })
     </script>
 </head>

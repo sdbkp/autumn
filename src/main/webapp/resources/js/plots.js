@@ -1,8 +1,32 @@
 angular.module("ngApp", [])
 	   .controller("ngCtrl", function($scope, $http) {
-		   var annualLabels = []; 	var annualFoEs = [];  var annualHpEs = [];
+		    var annualLabels = []; 	var annualFoEs = [];  var annualHpEs = [];
 	    	var monthlyLabels = []; var monthlyFoEs = []; var monthlyHpEs = [];
 	    	var hourlyLabels = []; 	var hourlyFoEs = [];  var hourlyHpEs = [];
+	    	var yAxes = [{
+				id: "left",
+				type: "linear",
+				position: "left",
+				gridLines: {
+					display: false
+				},
+				scaleLabel: {
+					display: true,
+					labelString: "foEs (MHz)"
+				}
+			}, {
+				id: "right",
+				type: "linear",
+				position: "right",
+				gridLines: {
+					display: false
+				},
+				scaleLabel: {
+					display: true,
+					labelString: "h'Es (km)"
+				}
+			}]
+	    	
 			$scope.plot = function() {
 				$http({
 					url: location.href,
@@ -61,29 +85,7 @@ angular.module("ngApp", [])
 										labelString: 'Year'
 									}
 								}],
-								yAxes: [{
-									id: "left",
-									type: "linear",
-									position: "left",
-									gridLines: {
-										display: false
-									},
-									scaleLabel: {
-										display: true,
-										labelString: "foEs (MHz)"
-									}
-								}, {
-									id: "right",
-									type: "linear",
-									position: "right",
-									gridLines: {
-										display: false
-									},
-									scaleLabel: {
-										display: true,
-										labelString: "h'Es (km)"
-									}
-								}]	
+								yAxes: yAxes
 							}
 						}
 					})
@@ -117,29 +119,7 @@ angular.module("ngApp", [])
 										labelString: 'Month'
 									}
 								}],
-								yAxes: [{
-									id: "left",
-									type: "linear",
-									position: "left",
-									gridLines: {
-										display: false
-									},
-									scaleLabel: {
-										display: true,
-										labelString: "foEs (MHz)"
-									}
-								}, {
-									id: "right",
-									type: "linear",
-									position: "right",
-									gridLines: {
-										display: false
-									},
-									scaleLabel: {
-										display: true,
-										labelString: "h'Es (km)"
-									}
-								}]	
+								yAxes: yAxes
 							}
 						}
 					})
@@ -173,29 +153,7 @@ angular.module("ngApp", [])
 										labelString: 'UT'
 									}
 								}],
-								yAxes: [{
-									id: "left",
-									type: "linear",
-									position: "left",
-									gridLines: {
-										display: false
-									},
-									scaleLabel: {
-										display: true,
-										labelString: "foEs (MHz)"
-									}
-								}, {
-									id: "right",
-									type: "linear",
-									position: "right",
-									gridLines: {
-										display: false
-									},
-									scaleLabel: {
-										display: true,
-										labelString: "h'Es (km)"
-									}
-								}]	
+								yAxes: yAxes
 							}
 						}
 					})
