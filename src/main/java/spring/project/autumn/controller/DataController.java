@@ -47,7 +47,6 @@ public class DataController {
 	
 	@PostMapping("/{station}/{path}")
 	public void detail(@PathVariable("station") String station, @PathVariable("path") String path, HttpServletResponse res) {
-		System.out.println("detail()");
 		try {
 			res.getWriter().write(ps.avg(station, path));
 		} catch (Exception e) {

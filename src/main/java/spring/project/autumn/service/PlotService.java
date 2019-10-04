@@ -29,18 +29,17 @@ public class PlotService {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		switch (path) {
 		case "annualMeanEs":
-			System.out.println("annualMean");
 			resultMap.put("result", dm.avgAll(new TableVO(station, "foEs", "hpEs", "year")));
 			break;
 			
 		case "monthlyMeanEs":
-			System.out.println("monthlyMean");
-			resultMap.put("result", dm.avg(new TableVO(station, "foEs", "hpEs", "year", "month")));
+			resultMap.put("result", dm.avgAll(new TableVO(station, "foEs", "hpEs", "month")));
+			resultMap.put("detailResult", dm.avg(new TableVO(station, "foEs", "hpEs", "year", "month")));
 			break;
 			
 		case "hourlyMeanEs":
-			System.out.println("hourlyMean");
-			resultMap.put("result", dm.avg(new TableVO(station, "foEs", "hpEs", "month", "hh")));
+			resultMap.put("result", dm.avgAll(new TableVO(station, "foEs", "hpEs", "hh")));
+			resultMap.put("detailResult", dm.avg(new TableVO(station, "foEs", "hpEs", "month", "hh")));
 			break;
 			
 		}
