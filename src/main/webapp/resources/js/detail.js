@@ -163,16 +163,31 @@ angular.module("ngApp", [])
         			data: []
         		}
         		
-        		for (var i = 0; i < $scope.detailData.length; i++) {
-        			if ($scope.detailData[i].year == label) {
-        				$scope.newFoEs.data.push($scope.detailData[i].frequency);
-        				$scope.newHpEs.data.push($scope.detailData[i].height);
-        			}
+        		if ($scope.path == "monthlyMeanEs") {
+        			console.log("Aa");
+        			for (var i = 0; i < $scope.detailData.length; i++) {
+            			if ($scope.detailData[i].year == label) {
+            				$scope.newFoEs.data.push($scope.detailData[i].frequency);
+            				$scope.newHpEs.data.push($scope.detailData[i].height);
+            			}
+            		}
+        		} else if ($scope.path == "hourlyMeanEs") {
+        			console.log("Bb");
+        			for (var i = 0; i < $scope.detailData.length; i++) {
+            			if ($scope.detailData[i].month == label) {
+            				$scope.newFoEs.data.push($scope.detailData[i].frequency);
+            				$scope.newHpEs.data.push($scope.detailData[i].height);
+            			}
+            		}
         		}
         		
         		config_1.data.datasets.push($scope.newFoEs);
         		config_2.data.datasets.push($scope.newHpEs);
-        			
+        		
+        		$scope.button = {
+        				"background-color": "aquamarine"
+        		}
+
     		}else {
         		config_1.data.datasets.splice(index, 1);
         		config_2.data.datasets.splice(index, 1);

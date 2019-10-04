@@ -15,6 +15,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
     <script src="/resources/js/detail.js"></script>
+    <style>
+    	.inner-container {
+    		display: flex;
+    		jusfy-content: center;
+    		max-width: 1000px;
+    		margin: auto;
+    		margin-top: 30px;
+    	}
+    </style>
 </head>
 <body data-ng-app="ngApp", data-ng-controller="ngCtrl">
     <header><h1>SSLAB</h1></header>
@@ -38,9 +47,11 @@
 	    		<canvas id="hpEs"></canvas>
 	    	</div>
     	</div>
-    	<div>
-    		<button type="button" class="button" data-ng-click="detail(label)" data-ng-repeat="label in list">{{label}}</button>
-    	</div>
+   		<div class="inner-container" >
+   			<div data-ng-repeat="label in list" data-ng-click="detail(label)" style="margin: auto;">
+   				<input type="checkbox" style="margin-left: 5px">{{label}}
+   			</div>
+   		</div>
     </div>
 </body>
 </html>

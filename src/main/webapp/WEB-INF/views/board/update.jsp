@@ -13,31 +13,7 @@
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.js"></script>
-    <script>
-        angular.module("ngApp", [])
-               .controller("ngCtrl", function($scope, $http) {
-            
-           	   $scope.update = function() {
-   				   $http({
-   					   url: "/setData",
-   					   method: "POST"
-   				   }).then(function() {
-   					   console.log("setData()")
-   				   })
-   			   }
-           	   
-           	   $scope.updateInfo = function() {
-           		   $http({
-           			   url: "/setInfo",
-           			   method: "POST"
-           		   }).then(function(res) {
-           			   $scope.updateList = res.data.result;
-           		   })
-           	   }
-           	   $scope.updateInfo();
-           	   
-        })
-    </script>
+    <script src="/resources/js/update.js"></script>
 </head>
 <body data-ng-app="ngApp", data-ng-controller="ngCtrl">
     <header><h1>SSLAB</h1></header>
