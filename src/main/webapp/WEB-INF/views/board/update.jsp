@@ -20,21 +20,31 @@
     
     <nav>
     	<ul>
-    		<a href="/"><li>Home</li></a>
-    		<a href="/IC437"><li>IC437</li></a>
-            <li style="background-color: #EFF5FB;">Data Update</li>
+            <a href="/"><li>Home</li></a>
+            <a><li style="background-color: #EFF5FB;">Update List</li></a>
+            <div data-ng-repeat="station in stations">
+            	<a href="/{{station}}"><li>{{station}}</li></a>
+            </div>
         </ul>
     </nav>
     
     <div class="container">
-        <div class="table-container">
-        	<button type="button" class="button" data-ng-click="update()">Update</button>
+    	<div class="inner-container">
+    		<label><p>Station: </p></label>
+    		<input type="text" data-ng-model="station">
+    		<button type="button" class="button" data-ng-click="search()">Search</button>
+    		<button type="button" class="button" data-ng-click="add()">Add</button>    	
+    	</div>
+    	
+        <div class="inner-container" style="text-align: right;">
+        	<button type="button" class="button" data-ng-click="update()">Data Update</button>
         	<table class="table table-striped" style="margin-top: 30px;">
 	        	<thead>
 	        		<tr>
 	        			<th>Station</th>
 	        			<th>Last Updated Time</th>
 	        			<th>File Name</th>
+	        			<th><input type="checkbox"></th>
 	        		</tr>
 	        	</thead>
 	        	<tbody>
@@ -42,6 +52,7 @@
 	        			<th>{{row.station}}</th>
 	        			<th>{{row.setTime}}</th>
 	        			<th>{{row.fileName}}</th>
+	        			<th><input type="checkbox"></th>
 	        		</tr>
 	        	</tbody>
 	        </table>

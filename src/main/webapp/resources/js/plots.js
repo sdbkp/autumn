@@ -27,10 +27,18 @@ angular.module("ngApp", [])
 				}
 			}]
 	    	
+		    $http({
+        		   url: "/getStations",
+        		   method: "POST"
+        	   }).then(function(res) {
+        		  $scope.stations = res.data.stations; 
+        	   });
+		    
 	    	$http({
 				url: location.href,
 				method: "POST"
 			}).then(function(res) {
+				console.log(res);
 				/* Annual Mean of F2 layer */
 				$scope.avgEsYear = res.data.avgEsYear;
 				for (var i = 0; i < $scope.avgEsYear.length; i++) {

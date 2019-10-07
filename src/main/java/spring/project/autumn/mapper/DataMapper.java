@@ -16,9 +16,8 @@ public interface DataMapper {
 	public int setSaoList(FileVO xvo);
 	public int tableCount(TableVO tvo);
 	public FileVO getSaoInfo(TableVO tvo);
-	public List<HashMap<String, Object>> getStations();
+	public List<String> getStations(TableVO tvo);
 	
 	public List<HashMap<String, Object>> avgAll(TableVO tvo);
 	public List<HashMap<String, Object>> avg(TableVO tvo);
-	
 }

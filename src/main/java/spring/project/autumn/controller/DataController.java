@@ -10,36 +10,38 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import spring.project.autumn.service.PlotService;
 import spring.project.autumn.service.SaoService;
+import spring.project.autumn.service.StationService;
+import spring.project.autumn.vo.TableVO;
 
 @Controller
 public class DataController {
 	
 	@Autowired
-	SaoService ss;
+	SaoService sao;
 	
 	@PostMapping("/setData")
 	public void setData(HttpServletResponse res) {
 		System.out.println("setData()");
-		ss.setData();
+		sao.setData();
 	}
 	
-	@PostMapping("/setInfo")
-	public void setInfo(HttpServletResponse res) {
+	@PostMapping("/updateInfo")
+	public void setInfo(HttpServletResponse res, TableVO tvo) {
+		System.out.println(tvo);
 		try {
-			res.getWriter().write(ss.updateInfo().toString());
+			res.getWriter().write(sao.updateInfo(tvo).toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-
 	@Autowired
-	PlotService ps;
+	PlotService plot;
 	
 	@PostMapping("/{station}")
-	public void test(@PathVariable("station") String station, HttpServletResponse res) {
+	public void getData(@PathVariable("station") String station, HttpServletResponse res) {
 		try {
-			res.getWriter().write(ps.avgAll(station));
+			res.getWriter().write(plot.avgAll(station));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -48,7 +50,30 @@ public class DataController {
 	@PostMapping("/{station}/{path}")
 	public void detail(@PathVariable("station") String station, @PathVariable("path") String path, HttpServletResponse res) {
 		try {
-			res.getWriter().write(ps.avg(station, path));
+			res.getWriter().write(plot.avg(station, path));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Autowired
+	StationService station;
+	
+	@PostMapping("/getStations")
+	public void getStations(HttpServletResponse res) {
+		try {
+			res.getWriter().write(station.getStations());
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@PostMapping("/addStation")
+	public void addStation(HttpServletResponse res, String stationName) {
+		try {
+			res.getWriter().write(station.addStation(stationName));
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

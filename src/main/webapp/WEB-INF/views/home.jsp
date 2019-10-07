@@ -20,6 +20,13 @@
         angular.module("ngApp", [])
                .controller("ngCtrl", function($scope, $http) {
                
+           	   $http({
+           		   url: "/getStations",
+           		   method: "POST"
+           	   }).then(function(res) {
+           		  $scope.stations = res.data.stations; 
+           	   });
+           	   
         })
     </script>
 </head>
@@ -28,9 +35,11 @@
     
     <nav>
     	<ul>
-            <li style="background-color: #EFF5FB;">Background</li>
-            <a href="/IC437"><li>IC437</li></a>
-            <a href="/update"><li>Data Update</li></a>
+            <li style="background-color: #EFF5FB;">Home</li>
+            <a href="/update"><li>Update List</li></a>
+            <div data-ng-repeat="station in stations">
+            	<a href="/{{station}}"><li>{{station}}</li></a>
+            </div>
         </ul>
     </nav>
     

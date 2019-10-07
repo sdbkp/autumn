@@ -2,9 +2,9 @@ th {
 	width: 200px;
 }
 
-.table-container {
+.inner-container {
 	max-width: 1000px;
 	margin: auto;
 	margin-top: 50px;
-	text-align: right;
+	text-align: justify;
 }

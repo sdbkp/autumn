@@ -1,6 +1,7 @@
 package spring.project.autumn.service;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,11 +18,9 @@ public class PlotService {
 	
 	public String avgAll(String station) {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
-		
 		resultMap.put("avgEsYear", dm.avgAll(new TableVO(station, "foEs", "hpEs", "year")));
 		resultMap.put("avgEsMonth", dm.avgAll(new TableVO(station, "foEs", "hpEs", "month")));
 		resultMap.put("avgEsHour", dm.avgAll(new TableVO(station, "foEs", "hpEs", "hh")));
-		
 		return JSONObject.fromObject(resultMap).toString();
 	}
 	
@@ -45,4 +44,5 @@ public class PlotService {
 		}
 		return JSONObject.fromObject(resultMap).toString();
 	}
+	
 }

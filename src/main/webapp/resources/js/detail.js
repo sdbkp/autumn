@@ -6,6 +6,13 @@ angular.module("ngApp", [])
     	var config_1; var config_2; var plot_1; var plot_2;
     	
     	$http({
+    		url: "/getStations",
+    		method: "POST"
+		}).then(function(res) {
+			$scope.stations = res.data.stations;
+		});
+    	
+    	$http({
 			url: location.href,
 			method: "POST"
 		}).then(function(res) {

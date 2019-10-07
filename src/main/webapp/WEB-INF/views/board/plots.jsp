@@ -22,8 +22,10 @@
     <nav>
     	<ul>
             <a href="/"><li>Home</li></a>
-            <li style="background-color: #EFF5FB;">IC437</li>
-            <a href="/update"><li>Data Update</li></a>
+            <a href="/update"><li>Update List</li></a>
+            <div data-ng-repeat="station in stations">
+            	<a href="/{{station}}"><li>{{station}}</li></a>
+            </div>
         </ul>
     </nav>
     

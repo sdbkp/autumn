@@ -14,25 +14,27 @@
 	</insert>
 	
 	<select id="tableCount" resultType="Integer">
-		select count(*) from ${tableName}
+		select count(*) from ${station}
 	</select>
 	
 	<select id="getSaoInfo" resultType="FileVO">
-		select station, `year`, `doy`, `fileName`, setTime from files where station = #{tableName} order by `no` desc limit 1
+		select station, `year`, `doy`, `fileName`, setTime from files where station = #{station} order by `no` desc limit 1
 	</select>
 	
-	<select id="getStations" resultType="hashmap">
-		select * from stations
+	<select id="getStations" resultType="String">
+		select station from stations where delYn = 'N'
+		<if test="station != null">
+			and station like '%${station}%'
+		</if>
 	</select>
 	
 	<select id="avgAll" resultType="hashmap">
-		select `${group_1}`, round(avg(${frequency}),2) as frequency, round(avg(${height}),2) as height from ${tableName} where ${frequency} != 9999 and ${height} != 9999 group by ${group_1}
+		select `${group_1}`, round(avg(${frequency}),2) as frequency, round(avg(${height}),2) as height from ${station} where ${frequency} != 9999 and ${height} != 9999 group by `${group_1}`
 	</select>
 	
 	<select id="avg" resultType="hashmap">
 		<!-- select `year`, `month`, round(avg(foF2), 2) as foF2, round(avg(hmF2), 2) as hmF2 from IC437_copy where foF2 != 9999 and hmF2 != 9999 group by `year`, `month` -->
-		select `${group_1}`, `${group_2}`, round(avg(${frequency}),2) as frequency, round(avg(${height}),2) as height from ${tableName} where ${frequency} != 9999 and ${height} != 9999 group by ${group_1}, ${group_2}
+		select `${group_1}`, `${group_2}`, round(avg(${frequency}),2) as frequency, round(avg(${height}),2) as height from ${station} where ${frequency} != 9999 and ${height} != 9999 group by `${group_1}`, `${group_2}`
 	</select>
-	
 	
 </mapper>

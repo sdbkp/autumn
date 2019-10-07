@@ -25,16 +25,14 @@ public class SaoService {
 	DataMapper dm;
 	
 	public void setData() {
-		List<HashMap<String, Object>> stations = dm.getStations();
-		String station;
+		List<String> stations = dm.getStations(new TableVO());
 		
-		for (int i = 0; i < stations.size(); i++) {
-			station = stations.get(i).get("station").toString();
+		for (String station : stations) {
 			FileVO fvo = null;
-			TableVO tvo = new TableVO(station);
+			TableVO tableName = new TableVO(station);
 			
-			if (dm.tableCount(tvo) != 0) {
-				fvo = dm.getSaoInfo(tvo);
+			if (dm.tableCount(tableName) != 0) {
+				fvo = dm.getSaoInfo(tableName);
 			} else {
 				fvo = new FileVO(station, "-1", "-1", "XXXXX_2019000000000.SAO");
 			}
@@ -45,16 +43,16 @@ public class SaoService {
 		System.out.println("End setData()");
 	}
 	
-	public JSONObject updateInfo() {
-		List<HashMap<String, Object>> stations = dm.getStations();
+	public JSONObject updateInfo(TableVO tvo) {
+		List<String> stations = dm.getStations(tvo);
 		List<FileVO> updateList = new ArrayList<FileVO>();
 		HashMap<String, List<FileVO>> resultMap = new HashMap<String, List<FileVO>>();
 		
-		for (int i = 0; i < stations.size(); i++) {
-			TableVO tvo = new TableVO(stations.get(i).get("station").toString());
+		for (String station : stations) {
+			TableVO tableName = new TableVO(station);
 			
-			if (dm.tableCount(tvo) != 0) {
-				updateList.add(dm.getSaoInfo(tvo));
+			if (dm.tableCount(tableName) != 0) {
+				updateList.add(dm.getSaoInfo(tableName));
 			}
 			
 		}
