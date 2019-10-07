@@ -28,7 +28,7 @@
     
     <nav>
     	<ul>
-            <li style="background-color: #EFF5FB;">Home</li>
+            <li style="background-color: #EFF5FB;">Background</li>
             <a href="/IC437"><li>IC437</li></a>
             <a href="/update"><li>Data Update</li></a>
         </ul>

@@ -36,7 +36,7 @@ public class SaoService {
 			if (dm.tableCount(tvo) != 0) {
 				fvo = dm.getSaoInfo(tvo);
 			} else {
-				fvo = new FileVO(station, "-1", "-1", "");
+				fvo = new FileVO(station, "-1", "-1", "XXXXX_2019000000000.SAO");
 			}
 			
 			getSao(fvo);
