@@ -24,9 +24,7 @@ public class SaoService {
 	@Autowired
 	DataMapper dm;
 	
-	public void setData() {
-		List<String> stations = dm.getStations(new TableVO());
-		
+	public void setData(String[] stations) {
 		for (String station : stations) {
 			FileVO fvo = null;
 			TableVO tableName = new TableVO(station);
@@ -39,8 +37,6 @@ public class SaoService {
 			
 			getSao(fvo);
 		}
-		
-		System.out.println("End setData()");
 	}
 	
 	public JSONObject updateInfo(TableVO tvo) {

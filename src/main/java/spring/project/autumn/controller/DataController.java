@@ -1,5 +1,6 @@
 package spring.project.autumn.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +21,12 @@ public class DataController {
 	SaoService sao;
 	
 	@PostMapping("/setData")
-	public void setData(HttpServletResponse res) {
-		System.out.println("setData()");
-		sao.setData();
+	public void setData(String[] stations, HttpServletResponse res) {
+		sao.setData(stations);
 	}
 	
 	@PostMapping("/updateInfo")
 	public void setInfo(HttpServletResponse res, TableVO tvo) {
-		System.out.println(tvo);
 		try {
 			res.getWriter().write(sao.updateInfo(tvo).toString());
 		} catch (Exception e) {

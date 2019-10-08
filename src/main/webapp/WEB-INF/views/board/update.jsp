@@ -44,15 +44,15 @@
 	        			<th>Station</th>
 	        			<th>Last Updated Time</th>
 	        			<th>File Name</th>
-	        			<th><input type="checkbox"></th>
+	        			<th><input type="checkbox" data-ng-model="check.all" data-ng-click="checkAll()"></th>
 	        		</tr>
 	        	</thead>
 	        	<tbody>
-	        		<tr data-ng-repeat="row in updateList">
-	        			<th>{{row.station}}</th>
-	        			<th>{{row.setTime}}</th>
-	        			<th>{{row.fileName}}</th>
-	        			<th><input type="checkbox"></th>
+	        		<tr data-ng-repeat="info in updateInfo">
+	        			<th>{{info.station}}</th>
+	        			<th>{{info.setTime}}</th>
+	        			<th>{{info.fileName}}</th>
+	        			<th><input type="checkbox" data-ng-checked="check.all" data-ng-model="info.check" data-ng-click="check(info)"></th>
 	        		</tr>
 	        	</tbody>
 	        </table>

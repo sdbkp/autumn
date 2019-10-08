@@ -12,16 +12,41 @@ angular.module("ngApp", [])
            		   url: "/updateInfo",
            		   method: "POST"
    			   }).then(function(res) {
-   				   $scope.updateList = res.data.result;
+   				   $scope.updateInfo = res.data.result;
 			   });
         	   
+        	   $scope.updateList = [];
+           	   $scope.check = function(info) {
+           		   if (info.check) {
+           			   $scope.updateList.push(info.station);
+           		   } else {
+           			   $scope.updateList.splice($scope.updateList.indexOf(info.station), 1);
+           		   }
+           		console.log($scope.updateList);
+           	   }
+           	   
+           	   $scope.checkAll = function() {
+           		   if ($scope.check.all) {
+           			   $scope.updateInfo.forEach(function(element) {
+           				   if ($scope.updateList.indexOf(element.station) == - 1) {
+           					   $scope.updateList.push(element.station);
+           				   }
+           			   });
+           		   } else {
+           			   $scope.updateList = [];
+           		   }
+           		   console.log($scope.updateList);
+           	   }
+           	   
            	   $scope.update = function() {
+           		   console.log($scope.updateList);
    				   $http({
    					   url: "/setData",
-   					   method: "POST"
-   				   }).then(function() {
-   					   console.log("setData()")
-   				   })
+   					   method: "POST",
+   					   params: {
+   						   stations: $scope.updateList
+   					   }
+   				   });
    			   }
            	   
            	   $scope.test = function(row) {
@@ -51,4 +76,5 @@ angular.module("ngApp", [])
            			   alert(res.data.result);
            		   })
            	   }
+           	   
 })
