@@ -13,6 +13,10 @@ angular.module("ngApp", [])
 				scaleLabel: {
 					display: true,
 					labelString: "foEs (MHz)"
+				},
+				ticks: {
+					min: 2,
+					max: 5.5
 				}
 			}, {
 				id: "right",
@@ -24,6 +28,10 @@ angular.module("ngApp", [])
 				scaleLabel: {
 					display: true,
 					labelString: "h'Es (km)"
+				},
+				ticks: {
+					min: 100,
+					max: 120
 				}
 			}]
 	    	

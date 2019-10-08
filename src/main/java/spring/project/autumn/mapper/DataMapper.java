@@ -19,5 +19,6 @@ public interface DataMapper {
 	public List<String> getStations(TableVO tvo);
 	
 	public List<HashMap<String, Object>> avgAll(TableVO tvo);
-	public List<HashMap<String, Object>> avg(TableVO tvo);
+	public List<HashMap<String, Object>> avgMonthly(TableVO tvo);
+	public List<HashMap<String, Object>> avgHourly(TableVO tvo);
 }

@@ -15,6 +15,12 @@ public class TableVO {
 		this.station = station;
 	}
 	
+	public TableVO(String station, String frequency, String height) {
+		this.station = station;
+		this.frequency = frequency;
+		this.height = height;
+	}
+	
 	public TableVO(String station, String frequency, String height, String group_1) {
 		this.station = station;
 		this.frequency = frequency;

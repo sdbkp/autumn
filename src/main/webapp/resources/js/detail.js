@@ -18,7 +18,7 @@ angular.module("ngApp", [])
 		}).then(function(res) {
 			$scope.data = res.data.result;
 			$scope.detailData = res.data.detailResult;
-
+			
 			for (var i = 0; i < $scope.data.length; i++) {
 				$scope.foEs.push($scope.data[i].frequency);
 				$scope.hpEs.push($scope.data[i].height);
@@ -94,6 +94,10 @@ angular.module("ngApp", [])
         					scaleLabel: {
         						display: true,
         						labelString: "foEs (MHz)"
+        					},
+        					ticks: {
+        						min: 2,
+        						max: 5.5
         					}
         				}]
         			}
@@ -130,6 +134,10 @@ angular.module("ngApp", [])
         					scaleLabel: {
         						display: true,
         						labelString: "h'Es (km)"
+        					},
+        					ticks: {
+        						min: 100,
+        						max: 120
         					}
         				}]
         			}
@@ -171,13 +179,13 @@ angular.module("ngApp", [])
         		}
         		
         		if ($scope.path == "monthlyMeanEs") {
-        			console.log("Aa");
         			for (var i = 0; i < $scope.detailData.length; i++) {
             			if ($scope.detailData[i].year == label) {
             				$scope.newFoEs.data.push($scope.detailData[i].frequency);
             				$scope.newHpEs.data.push($scope.detailData[i].height);
             			}
             		}
+        			console.log($scope.newFoEs.data);
         		} else if ($scope.path == "hourlyMeanEs") {
         			console.log("Bb");
         			for (var i = 0; i < $scope.detailData.length; i++) {

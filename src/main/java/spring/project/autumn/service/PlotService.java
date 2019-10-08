@@ -33,12 +33,12 @@ public class PlotService {
 			
 		case "monthlyMeanEs":
 			resultMap.put("result", dm.avgAll(new TableVO(station, "foEs", "hpEs", "month")));
-			resultMap.put("detailResult", dm.avg(new TableVO(station, "foEs", "hpEs", "year", "month")));
+			resultMap.put("detailResult", dm.avgMonthly(new TableVO(station, "foEs", "hpEs")));
 			break;
 			
 		case "hourlyMeanEs":
 			resultMap.put("result", dm.avgAll(new TableVO(station, "foEs", "hpEs", "hh")));
-			resultMap.put("detailResult", dm.avg(new TableVO(station, "foEs", "hpEs", "month", "hh")));
+			resultMap.put("detailResult", dm.avgHourly(new TableVO(station, "foEs", "hpEs", "month", "hh")));
 			break;
 			
 		}

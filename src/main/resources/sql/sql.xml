@@ -32,9 +32,22 @@
 		select `${group_1}`, round(avg(${frequency}),2) as frequency, round(avg(${height}),2) as height from ${station} where ${frequency} != 9999 and ${height} != 9999 group by `${group_1}`
 	</select>
 	
-	<select id="avg" resultType="hashmap">
-		<!-- select `year`, `month`, round(avg(foF2), 2) as foF2, round(avg(hmF2), 2) as hmF2 from IC437_copy where foF2 != 9999 and hmF2 != 9999 group by `year`, `month` -->
+	<select id="avgMonthly" resultType="hashmap">
+		select y.`year`, y.`month`, d.frequency as frequency, d.height as height
+			from y
+			left outer join (
+				select `year`, `month`, round(avg(${frequency}), 2) as frequency, round(avg(${height}), 2) as height 
+					from ${station} 
+					where ${frequency} != 9999 and ${height} != 9999 
+					group by `year`, `month`) as d
+			on (y.`year` = d.`year` and y.`month` = d.`month`)
+			where y.target = #{station}
+			order by 1, 2
+	</select>
+	
+	<select id="avgHourly" resultType="hashmap">
 		select `${group_1}`, `${group_2}`, round(avg(${frequency}),2) as frequency, round(avg(${height}),2) as height from ${station} where ${frequency} != 9999 and ${height} != 9999 group by `${group_1}`, `${group_2}`
+		
 	</select>
 	
 </mapper>
