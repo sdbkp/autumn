@@ -21,4 +21,5 @@ public interface DataMapper {
 	public List<HashMap<String, Object>> avgAll(TableVO tvo);
 	public List<HashMap<String, Object>> avgMonthly(TableVO tvo);
 	public List<HashMap<String, Object>> avgHourly(TableVO tvo);
+	
 }

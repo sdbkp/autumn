@@ -67,6 +67,7 @@ th {
 	border-radius: 5px;
 	font-weight: bolder;
 	margin-left: 10px;
+	padding: 0;
 }
 
 .button:hover {

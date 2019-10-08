@@ -8,3 +8,13 @@ th {
 	margin-top: 50px;
 	text-align: justify;
 }
+
+p {
+	width: 55px;
+	margin: 0;
+}
+
+.form-control {
+	width: calc(100% - 326px);
+	display: inline-block;
+}

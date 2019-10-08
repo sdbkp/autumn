@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="/resources/css/common.css">
     <link rel="stylesheet" href="/resources/css/update.css">
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
@@ -30,10 +31,10 @@
     
     <div class="container">
     	<div class="inner-container">
-    		<label><p>Station: </p></label>
-    		<input type="text" data-ng-model="station">
+    		<label ><p>Station: </p></label>
+    		<input type="text" class="form-control" data-ng-model="station">
     		<button type="button" class="button" data-ng-click="search()">Search</button>
-    		<button type="button" class="button" data-ng-click="add()">Add</button>    	
+    		<button type="button" class="button" data-ng-click="add()">Addition</button>    	
     	</div>
     	
         <div class="inner-container" style="text-align: right;">
