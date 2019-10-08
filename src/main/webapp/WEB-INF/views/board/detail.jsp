@@ -50,8 +50,8 @@
 	    	</div>
     	</div>
    		<div class="inner-container" >
-   			<div data-ng-repeat="label in list" data-ng-click="detail(label)" style="margin: auto;">
-   				<input type="checkbox" style="margin-left: 5px">{{label}}
+   			<div data-ng-repeat="label in list" style="margin: auto;">
+   				<input type="checkbox" data-ng-click="detail(label)" style="margin: 5px">{{label}}
    			</div>
    		</div>
     </div>

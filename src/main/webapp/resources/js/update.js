@@ -49,10 +49,6 @@ angular.module("ngApp", [])
    				   });
    			   }
            	   
-           	   $scope.test = function(row) {
-           		   console.log(row);
-           	   }
-           	   
            	   $scope.search = function() {
            		   $http({
            			   url: "/updateInfo",
@@ -61,7 +57,7 @@ angular.module("ngApp", [])
            				   station: $scope.station
            			   }
            		   }).then(function(res) {
-           			   $scope.updateList = res.data.result;
+           			   $scope.updateInfo = res.data.result;
            		   });
            	   }
            	   
