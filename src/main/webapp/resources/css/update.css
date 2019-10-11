@@ -7,6 +7,7 @@ th {
 	margin: auto;
 	margin-top: 50px;
 	text-align: justify;
+	padding: 0 20px;
 }
 
 p {
@@ -14,6 +15,6 @@ p {
 }
 
 .form-control {
-	width: calc(100% - 326px);
+	width: calc(100% - 322px);
 	display: inline-block;
 }
