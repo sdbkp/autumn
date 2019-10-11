@@ -19,7 +19,7 @@
     <nav>
     	<ul>
             <a href="/"><li>Home</li></a>
-            <a><li style="background-color: #EFF5FB;">Update List</li></a>
+            <a><li style="background-color: #EFF5FB;">Update</li></a>
             <div data-ng-repeat="station in stations">
             	<a href="/{{station}}"><li>{{station}}</li></a>
             </div>
@@ -28,14 +28,16 @@
     
     <div class="container">
     	<div class="inner-container">
-    		<label ><p>Station: </p></label>
+    		<label ><p>Station:&nbsp;</p></label>
     		<input type="text" class="form-control" data-ng-model="station">
     		<button type="button" class="button" data-ng-click="search()">Search</button>
     		<button type="button" class="btn button" data-ng-disabled="!${sessionScope.admin}" data-ng-click="add()">Addition</button>    	
-    	</div>
     	
-        <div class="inner-container" style="text-align: right;">
-        	<button type="button" class="btn button" data-ng-disabled="!${sessionScope.admin}" data-ng-click="update()">Data Update</button>
+        	<div style="margin-top: 20px;">
+	        	<label style="display: inline-block;"><p>More Data:&nbsp;<a href="ftp://ftp.ngdc.noaa.gov/ionosonde/data/">Click here :D</a></p></label>
+	        	<button type="button" style="float: right;" class="btn button" data-ng-disabled="!${sessionScope.admin}" data-ng-click="update()">Data Update</button>
+        	</div>
+        	
         	<table class="table table-striped" style="margin-top: 30px;">
 	        	<thead>
 	        		<tr>

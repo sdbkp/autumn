@@ -20,9 +20,9 @@
     <nav>
     	<ul>
             <a href="/"><li>Home</li></a>
-            <a href="/update"><li>Update List</li></a>
+            <a href="/update"><li>Update</li></a>
             <div data-ng-repeat="station in stations">
-            	<a href="/{{station}}"><li data-ng-style="test(station)">{{station}}</li></a>
+            	<a href="/{{station}}"><li data-ng-style="setColor(station)">{{station}}</li></a>
             </div>
         </ul>
     </nav>
