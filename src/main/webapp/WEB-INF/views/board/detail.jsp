@@ -10,18 +10,10 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="/resources/css/common.css">
     <link rel="stylesheet" href="/resources/css/plots.css">
+    <link rel="stylesheet" href="/resources/css/detail.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
     <script src="/resources/js/detail.js"></script>
-    <style>
-    	.inner-container {
-    		display: flex;
-    		jusfy-content: center;
-    		max-width: 1000px;
-    		margin: auto;
-    		margin-top: 30px;
-    	}
-    </style>
 </head>
 <body data-ng-app="ngApp", data-ng-controller="ngCtrl">
     <header><h1>SSLAB</h1></header>
@@ -37,8 +29,9 @@
     </nav>
     
     <div class="container">
-    	<button type="button" class="button" style="margin: 20px 0 0 25px;" data-ng-click="back()">Back</button>
-    	<div>
+    	<div class="inner-container">
+    	<button type="button" class="button" style="margin-left: 25px;" data-ng-click="back()">Back</button><br>
+    	
     		<div class="plot">
 	    		<canvas id="foEs"></canvas>
 	    	</div>
@@ -46,11 +39,12 @@
 	    	<div class="plot">
 	    		<canvas id="hpEs"></canvas>
 	    	</div>
-    	</div>
-   		<div class="inner-container" >
+    	
+   		<div class="inner-container-2" >
    			<div data-ng-repeat="label in list" style="margin: auto;">
    				<input type="checkbox" data-ng-click="detail(label)" style="margin: 5px">{{label}}
    			</div>
+   		</div>
    		</div>
     </div>
 </body>
