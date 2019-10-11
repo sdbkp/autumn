@@ -22,7 +22,6 @@ angular.module("ngApp", [])
    		   } else {
    			   $scope.updateList.splice($scope.updateList.indexOf(info.station), 1);
    		   }
-   		console.log($scope.updateList);
    	   }
    	   
    	   $scope.checkAll = function() {
@@ -35,7 +34,6 @@ angular.module("ngApp", [])
    		   } else {
    			   $scope.updateList = [];
    		   }
-   		   console.log($scope.updateList);
    	   }
    	   
    	   $scope.update = function() {

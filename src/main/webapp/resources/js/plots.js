@@ -42,11 +42,16 @@ angular.module("ngApp", [])
         		  $scope.stations = res.data.stations; 
         	   });
 		    
+		    $scope.test = function(station) {
+				if (location.href.substring(location.href.lastIndexOf("/") + 1, location.href.length) == station) {
+					return {backgroundColor: "#EFF5FB"};
+				}
+			}
+		    
 	    	$http({
 				url: location.href,
 				method: "POST"
 			}).then(function(res) {
-				console.log(res);
 				/* Annual Mean of F2 layer */
 				$scope.avgEsYear = res.data.avgEsYear;
 				for (var i = 0; i < $scope.avgEsYear.length; i++) {
@@ -181,4 +186,6 @@ angular.module("ngApp", [])
 			$scope.detail = function(path) {
 				location.href = location.href + "/" + path;
 			}
+			
+			
    })

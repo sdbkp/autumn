@@ -22,7 +22,7 @@
             <a href="/"><li>Home</li></a>
             <a href="/update"><li>Update List</li></a>
             <div data-ng-repeat="station in stations">
-            	<a href="/{{station}}"><li>{{station}}</li></a>
+            	<a href="/{{station}}"><li data-ng-style="test(station)">{{station}}</li></a>
             </div>
         </ul>
     </nav>
