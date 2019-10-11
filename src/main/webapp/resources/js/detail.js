@@ -105,7 +105,7 @@ angular.module("ngApp", [])
         					},
         					ticks: {
         						min: 2,
-        						max: 5.5
+        						max: 7
         					}
         				}]
         			}
@@ -145,7 +145,7 @@ angular.module("ngApp", [])
         					},
         					ticks: {
         						min: 100,
-        						max: 120
+        						max: 130
         					}
         				}]
         			}

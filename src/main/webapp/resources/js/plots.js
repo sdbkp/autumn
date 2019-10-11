@@ -31,7 +31,7 @@ angular.module("ngApp", [])
 				},
 				ticks: {
 					min: 100,
-					max: 120
+					max: 130
 				}
 			}]
 	    	
