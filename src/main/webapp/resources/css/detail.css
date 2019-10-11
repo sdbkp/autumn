@@ -16,6 +16,10 @@
 	margin: auto;
 }
 
+.plot {
+	width: 50%;
+}
+
 .button {
 	margin-left: 25px;
 }

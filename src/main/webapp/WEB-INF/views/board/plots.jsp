@@ -28,24 +28,9 @@
     </nav>
     
     <div class="container">
-    	<div class="plot">
-    		<canvas id="annualMeanEs" data-ng-click="detail('annualMeanEs')"></canvas>
-    	</div>
-    	
-    	<div class="plot"></div>
-    	
-    	<div class="plot">
-    		<canvas id="monthlyMeanEs" data-ng-click="detail('monthlyMeanEs')"></canvas>
-    	</div>
-    	
-    	<div class="plot">
-    	</div>
-    	
-    	<div class="plot">
-    		<canvas id="hourlyMeanEs" data-ng-click="detail('hourlyMeanEs')"></canvas>
-    	</div>
-    	
-    	<div class="plot"></div>
+    	<div class="plot"><canvas id="annualMeanEs" data-ng-click="detail('annualMeanEs')"></canvas></div>
+    	<div class="plot"><canvas id="monthlyMeanEs" data-ng-click="detail('monthlyMeanEs')"></canvas></div>
+    	<div class="plot"><canvas id="hourlyMeanEs" data-ng-click="detail('hourlyMeanEs')"></canvas></div>
     </div>
 </body>
 </html>
