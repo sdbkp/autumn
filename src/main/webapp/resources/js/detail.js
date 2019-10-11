@@ -1,6 +1,8 @@
 angular.module("ngApp", [])
        .controller("ngCtrl", function($scope, $http) {
-    	$scope.path = location.href.substring(location.href.lastIndexOf("/") + 1, location.href.length);
+    	$scope.urls = location.href.split("/");
+    	$scope.location = $scope.urls[3];
+    	$scope.path = $scope.urls[4];
     	$scope.labels = []; 	$scope.foEs = [];  $scope.hpEs = []; $scope.list = [];
     	$scope.xLabelString = "";
     	var config_1; var config_2; var plot_1; var plot_2;
@@ -13,7 +15,7 @@ angular.module("ngApp", [])
 		});
     	
     	$scope.setColor = function(station) {
-			if (location.href.substring(location.href.lastIndexOf("/") + 1, location.href.length) == station) {
+			if ($scope.location == station) {
 				return {backgroundColor: "#EFF5FB"};
 			}
 		}

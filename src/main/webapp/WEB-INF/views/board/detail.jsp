@@ -29,8 +29,8 @@
     </nav>
     
     <div class="container">
-    	<div class="inner-container">
-    	<button type="button" class="button" style="margin-left: 25px;" data-ng-click="back()">Back</button><br>
+    	<div class="inner-container-1">
+    	<button type="button" class="button" data-ng-click="back()">Back</button><br>
     	
     		<div class="plot">
 	    		<canvas id="foEs"></canvas>

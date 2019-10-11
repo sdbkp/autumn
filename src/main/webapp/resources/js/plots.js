@@ -42,8 +42,9 @@ angular.module("ngApp", [])
         		  $scope.stations = res.data.stations; 
         	   });
 		    
+		    $scope.path = location.href.substring(location.href.lastIndexOf("/") + 1, location.href.length); 
 		    $scope.setColor = function(station) {
-				if (location.href.substring(location.href.lastIndexOf("/") + 1, location.href.length) == station) {
+				if ($scope.path == station) {
 					return {backgroundColor: "#EFF5FB"};
 				}
 			}
