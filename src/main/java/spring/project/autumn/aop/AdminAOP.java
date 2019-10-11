@@ -21,6 +21,14 @@ public class AdminAOP {
 		System.out.println("==== AOP ====");
 		
 		Object[] objects = jp.getArgs();
+		
+		for (Object object : objects) {
+			if (object instanceof HttpSession) {
+				HttpSession ses = (HttpSession) object;
+				ses.setAttribute("admin", false);
+			}
+		}
+		
 		for (Object object : objects) {
 			if (object instanceof HttpServletRequest) {
 				HttpServletRequest req = (HttpServletRequest) object;
