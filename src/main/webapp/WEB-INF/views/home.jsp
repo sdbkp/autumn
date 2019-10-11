@@ -35,8 +35,8 @@
     
     <nav>
     	<ul>
-            <li style="background-color: #EFF5FB;">Home</li>
-            <a href="/update"><li>Update</li></a>
+            <li style="background-color: #EFF5FB;">Introduction</li>
+            <a href="/update"><li>Data</li></a>
             <div data-ng-repeat="station in stations">
             	<a href="/{{station}}"><li>{{station}}</li></a>
             </div>

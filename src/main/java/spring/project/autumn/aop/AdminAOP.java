@@ -18,8 +18,6 @@ public class AdminAOP {
 	
 	@Around("pointcut()")
 	public Object around(ProceedingJoinPoint jp) throws Throwable {
-		System.out.println("==== AOP ====");
-		
 		Object[] objects = jp.getArgs();
 		
 		for (Object object : objects) {

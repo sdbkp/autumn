@@ -1,9 +1,15 @@
+.container {
+	display: flex;
+	align-items: center;
+	height: calc(100vh - 180px);
+}
+
 .inner-container-1, .inner-container-2 {
 	text-align: center;
 	width: 50%;
 	min-width: 500px;
 	float: left;
-	padding: 50px;
+	padding: 0 50px;
 }
 
 .inner-container-2 {
@@ -13,10 +19,14 @@
 img {
 	margin-bottom: 30px;
 	width: 100%;
-	max-width: 500px;
+	max-width: 600px;
 }
 
-@media only screen and (max-width: 1250px) {
+@media only screen and (max-width: 1600px) {
+	.container {
+		display: block;
+		height: 100%;
+	}
 	.inner-container-1, .inner-container-2 {
 		width: 80%;
 		float: none;
@@ -24,6 +34,7 @@ img {
 	}
 	
 	.inner-container-1 {
+		padding-top: 50px;
 		padding-bottom: 30px;
 	}
 	.inner-container-2 {

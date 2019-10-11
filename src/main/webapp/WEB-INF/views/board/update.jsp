@@ -18,8 +18,8 @@
     
     <nav>
     	<ul>
-            <a href="/"><li>Home</li></a>
-            <a><li style="background-color: #EFF5FB;">Update</li></a>
+            <a href="/"><li>Introduction</li></a>
+            <a><li style="background-color: #EFF5FB;">Data</li></a>
             <div data-ng-repeat="station in stations">
             	<a href="/{{station}}"><li>{{station}}</li></a>
             </div>
@@ -31,11 +31,11 @@
     		<label ><p>Station:&nbsp;</p></label>
     		<input type="text" class="form-control" data-ng-model="station">
     		<button type="button" class="button" data-ng-click="search()">Search</button>
-    		<button type="button" class="btn button" data-ng-disabled="!${sessionScope.admin}" data-ng-click="add()">Addition</button>    	
+    		<button type="button" class="btn button" data-ng-disabled="!${sessionScope.admin}" data-ng-click="add()">Add</button>    	
     	
         	<div style="margin-top: 20px;">
 	        	<label style="display: inline-block;"><p>More Data:&nbsp;<a href="ftp://ftp.ngdc.noaa.gov/ionosonde/data/">Click here :D</a></p></label>
-	        	<button type="button" style="float: right;" class="btn button" data-ng-disabled="!${sessionScope.admin}" data-ng-click="update()">Data Update</button>
+	        	<button type="button" style="float: right;" class="btn button" data-ng-disabled="!${sessionScope.admin}" data-ng-click="update()">Update</button>
         	</div>
         	
         	<table class="table table-striped" style="margin-top: 30px;">
@@ -44,7 +44,7 @@
 	        			<th>Station</th>
 	        			<th>Last Updated Time</th>
 	        			<th>File Name</th>
-	        			<th><input type="checkbox" data-ng-model="check.all" data-ng-click="checkAll()"></th>
+	        			<th><input type="checkbox" data-ng-model="check.all" data-ng-disabled="!${sessionScope.admin}" data-ng-click="checkAll()"></th>
 	        		</tr>
 	        	</thead>
 	        	<tbody>
@@ -52,7 +52,7 @@
 	        			<th>{{info.station}}</th>
 	        			<th>{{info.setTime}}</th>
 	        			<th>{{info.fileName}}</th>
-	        			<th><input type="checkbox" data-ng-checked="check.all" data-ng-model="info.check" data-ng-click="check(info)"></th>
+	        			<th><input type="checkbox" data-ng-checked="check.all" data-ng-disabled="!${sessionScope.admin}" data-ng-model="info.check" data-ng-click="check(info)"></th>
 	        		</tr>
 	        	</tbody>
 	        </table>
