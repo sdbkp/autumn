@@ -39,7 +39,7 @@
     </nav>
     
     <div class="container">
-    	<button type="button" class="button" data-ng-click="back()">Back</button>
+    	<button type="button" class="button" style="margin: 20px 0 0 25px;" data-ng-click="back()">Back</button>
     	<div>
     		<div class="plot">
 	    		<canvas id="foEs"></canvas>

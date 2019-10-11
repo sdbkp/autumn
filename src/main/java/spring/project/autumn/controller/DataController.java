@@ -1,11 +1,9 @@
 package spring.project.autumn.controller;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -20,13 +18,13 @@ public class DataController {
 	@Autowired
 	SaoService sao;
 	
-	@PostMapping("/setData")
-	public void setData(String[] stations, HttpServletResponse res) {
+	@PostMapping("/updateData")
+	public void updateData(String[] stations, HttpServletResponse res) {
 		sao.setData(stations);
 	}
 	
-	@PostMapping("/updateInfo")
-	public void setInfo(HttpServletResponse res, TableVO tvo) {
+	@PostMapping("/getUpdateInfo")
+	public void getUpdateInfo(HttpServletResponse res, TableVO tvo) {
 		try {
 			res.getWriter().write(sao.updateInfo(tvo).toString());
 		} catch (Exception e) {
@@ -68,8 +66,8 @@ public class DataController {
 		}
 	}
 	
-	@PostMapping("/addStation")
-	public void addStation(HttpServletResponse res, String stationName) {
+	@PostMapping("/updateStation")
+	public void updateStation(HttpServletResponse res, String stationName) {
 		try {
 			res.getWriter().write(station.addStation(stationName));
 			
@@ -77,4 +75,5 @@ public class DataController {
 			e.printStackTrace();
 		}
 	}
+	
 }

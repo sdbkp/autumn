@@ -27,41 +27,44 @@ public class StationService {
 	
 	public String addStation(String stationName) {
 		HashMap<String, String> resultMap = new HashMap<String, String>();
-		
-		try {
-			String url = "ftp.ngdc.noaa.gov";
-			String ftpPath = "/ionosonde/data";
-			
-			FTPClient ftp = new FTPClient();
-			ftp.connect(url);
-			ftp.enterLocalPassiveMode();
-			ftp.login("anonymous", "");
-			
-			String tableName = "";
-			FTPFile[] stationList = ftp.listFiles(ftpPath);
-			for (FTPFile station : stationList) {
-				if (stationName.equals(station.getName())) {
-					tableName = station.getName();
-					
-					break;
-				}
-			}
-			
-			if (!"".equals(tableName)) {
-				if (dm.getStations(new TableVO(tableName)).size() != 0) {
-					resultMap.put("result", stationName + " station is already registrated.");
-				} else {
-					//
-					resultMap.put("result", stationName + " station registration completed successfully.");
+		if (stationName == null) {
+			resultMap.put("result", "Insert station name");
+		} else {
+			try {
+				String url = "ftp.ngdc.noaa.gov";
+				String ftpPath = "/ionosonde/data";
+				
+				FTPClient ftp = new FTPClient();
+				ftp.connect(url);
+				ftp.enterLocalPassiveMode();
+				ftp.login("anonymous", "");
+				
+				String tableName = "";
+				FTPFile[] stationList = ftp.listFiles(ftpPath);
+				for (FTPFile station : stationList) {
+					if (stationName.equals(station.getName())) {
+						tableName = station.getName();
+						
+						break;
+					}
 				}
 				
-			} else {
-				resultMap.put("result", stationName + " station does not exist.");
+				if (!"".equals(tableName)) {
+					if (dm.getStations(new TableVO(tableName)).size() != 0) {
+						resultMap.put("result", stationName + " station is already registrated.");
+					} else {
+						resultMap.put("result", stationName + " station registration completed successfully.");
+					}
+					
+				} else {
+					resultMap.put("result", stationName + " station does not exist.");
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
+		
 		
 		return JSONObject.fromObject(resultMap).toString();
 	}

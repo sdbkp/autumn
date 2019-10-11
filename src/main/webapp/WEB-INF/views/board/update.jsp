@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="/resources/css/common.css">
     <link rel="stylesheet" href="/resources/css/update.css">
-    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.js"></script>
     <script src="/resources/js/update.js"></script>
@@ -34,11 +35,11 @@
     		<label ><p>Station: </p></label>
     		<input type="text" class="form-control" data-ng-model="station">
     		<button type="button" class="button" data-ng-click="search()">Search</button>
-    		<button type="button" class="button" data-ng-click="add()">Addition</button>    	
+    		<button type="button" class="btn button" data-ng-disabled="!${sessionScope.admin}" data-ng-click="add()">Addition</button>    	
     	</div>
     	
         <div class="inner-container" style="text-align: right;">
-        	<button type="button" class="button" data-ng-click="update()">Data Update</button>
+        	<button type="button" class="btn button" data-ng-disabled="!${sessionScope.admin}" data-ng-click="update()">Data Update</button>
         	<table class="table table-striped" style="margin-top: 30px;">
 	        	<thead>
 	        		<tr>
