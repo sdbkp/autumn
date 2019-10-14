@@ -28,6 +28,15 @@
     
     <div class="container">
     	<div class="inner-container">
+    		<div style="margin-bottom: 50px;">
+	        	<p>	&emsp;&emsp;Ionosondes measure the critical frequencies of ionized layers in ionosphere and their virtual heights routinely day and night. 
+	        		The sporadic E data used in this project were obtained from the ionosonde measurements at Icheon (37.14°N, 127.54°E, IC) and Jeju (33.4°N, 126.30°E, JJ) in 2010–2019. 
+	        		The IC and JJ ionosondes are a type of the digisonde, Digisonde Portable Sounder 4D (DPS4D). The observations of the ionosondes are analyzed by 
+	        		a software of Automatic Real-Time Ionogram Scaling with True analysis (ARTIST-5) and then saved as a format of Standard Archiving Output (SAO). 
+	        		The auto-scaled data can be downloaded at the website of the National Oceanic and Atmospheric Administration. 
+	        	</p>
+	        </div>
+	        
     		<label ><p>Station:&nbsp;</p></label>
     		<input type="text" class="form-control" data-ng-model="station">
     		<button type="button" class="button" data-ng-click="search()">Search</button>

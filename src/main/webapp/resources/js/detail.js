@@ -7,6 +7,14 @@ angular.module("ngApp", [])
     	$scope.xLabelString = "";
     	var config_1; var config_2; var plot_1; var plot_2;
     	
+    	if ($scope.path == "monthlyMeanEs") {
+    		$scope.sv = true;
+    		$scope.utv = false;
+    	} else {
+    		$scope.sv = false;
+    		$scope.utv = true;
+    	}
+    	
     	$http({
     		url: "/getStations",
     		method: "POST"

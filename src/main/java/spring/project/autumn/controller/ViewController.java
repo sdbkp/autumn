@@ -21,10 +21,10 @@ public class ViewController {
 		return "home";
 	}
 	
-	@GetMapping("/update")
+	@GetMapping("/data")
 	public String update(HttpServletRequest req, HttpSession ses) {
 		as.admin(req, ses);
-		return "board/update";
+		return "board/data";
 	}
 	
 	@GetMapping("/{sation}")

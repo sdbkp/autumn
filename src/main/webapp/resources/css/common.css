@@ -7,6 +7,10 @@ h1 {
     margin: 0;
 }
 
+p {
+	font-weight: bolder;
+}
+
 header {
     width: 100%;
     height: 180px;
