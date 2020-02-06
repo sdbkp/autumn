@@ -38,7 +38,7 @@ angular.module("ngApp", [])
 			for (var i = 0; i < $scope.data.length; i++) {
 				$scope.foEs.push($scope.data[i].frequency);
 				$scope.hpEs.push($scope.data[i].height);
-    		}
+    			}
 			
 			
 			switch ($scope.path) {
@@ -55,11 +55,11 @@ angular.module("ngApp", [])
 				}
 				$scope.xLabelString = "Month";
 				
-            	for (var i = 0; i < $scope.detailData.length; i++) {
-            		if (!$scope.list.includes($scope.detailData[i].year)) {
-            			$scope.list.push($scope.detailData[i].year);
-            		}	
-            	}
+            			for (var i = 0; i < $scope.detailData.length; i++) {
+            				if (!$scope.list.includes($scope.detailData[i].year)) {
+            				$scope.list.push($scope.detailData[i].year);
+            				}	
+            			}
 				break;
 				
 			case "hourlyMeanEs":
@@ -69,10 +69,10 @@ angular.module("ngApp", [])
 				$scope.xLabelString = "UT";
 				
 				for (var i = 0; i < $scope.detailData.length; i++) {
-            		if (!$scope.list.includes($scope.detailData[i].month)) {
-            			$scope.list.push($scope.detailData[i].month);
-            		}	
-            	}
+					if (!$scope.list.includes($scope.detailData[i].month)) {
+						$scope.list.push($scope.detailData[i].month);
+					}	
+            			}
 				break;
 			}
 			
